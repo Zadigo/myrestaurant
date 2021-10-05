@@ -20,6 +20,10 @@ django-imagekit = "*"
 djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
+channels = "*"
+django-redis = "*"
+celery = "*"
+flower = "*"
 
 [dev-packages]
 
