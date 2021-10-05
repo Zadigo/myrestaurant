@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,8 +75,12 @@ WSGI_APPLICATION = 'restaurant.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'restaurant'),
+        'USER': os.environ.get('DB_USER', 'zadigo'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'zadigo'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': '5432',
     }
 }
 
@@ -134,3 +139,50 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 SITE = 1
+
+
+# CORS
+
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_REGEX_WHITELIST = [
+    r'^https?\:\/\/localhost\:808\d{1}$',
+    r'^https?\:\/\/192\.168\.0\.\d{3}\:8080$'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'localhost:8080',
+    '192.168.0.103:8080',
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
+
+
+# EMAIL
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', None)
+
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', None)
+
+EMAIL_USE_TLS = True
+
+EMAIL_PORT = 587
+
+EMAIL_USE_LOCALTIME = True
+
+
+# Debug
+
+INTERNAL_IPS = [
+    '127.0.0.1'
+]
