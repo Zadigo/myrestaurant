@@ -16,7 +16,7 @@ class Menu(models.Model):
 
     class Meta:
         constraints = [
-            UniqueConstraint(fields=['name'])
+            UniqueConstraint(fields=['name'], name='unique_menu_name')
         ]
         indexes = [
             Index(fields=['name'])
@@ -30,7 +30,7 @@ class Pickup(models.Model):
     reference = models.UUIDField(default=uuid4, unique=True)
     date = models.DateTimeField(default=timezone.now)
     firstname = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100)
     telephone = models.CharField(max_length=50, validators=[])
     menu = models.ForeignKey(
         Menu,

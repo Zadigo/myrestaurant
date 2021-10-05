@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-&%t24zb#dkog_4p2q8m%*vig5-6zk15@o*wh2n%m_)7^t7p^$k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '.ngrok.io']
 
 
 # Application definition
@@ -38,8 +38,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -73,17 +73,23 @@ WSGI_APPLICATION = 'restaurant.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('DB_NAME', 'restaurant'),
+#         'USER': os.environ.get('DB_USER', 'zadigo'),
+#         'PASSWORD': os.environ.get('DB_PASSWORD', 'zadigo'),
+#         'HOST': os.environ.get('DB_HOST', 'localhost'),
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'restaurant'),
-        'USER': os.environ.get('DB_USER', 'zadigo'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'zadigo'),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -123,8 +129,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = Path.joinpath(BASE_DIR, 'static')
+
 STATICFILES_DIRS = [
-    Path.joinpath(BASE_DIR, 'static')
+    Path.joinpath(FRONT_DIR, 'dist/static')
 ]
 
 MEDIA_URL = '/media/'

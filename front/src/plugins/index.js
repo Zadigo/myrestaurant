@@ -1,7 +1,10 @@
 import client from '../axiosclient'
+import api from './api'
 
 export default {
     install: (Vue) => {
-        Vue.prototype.$api = {client}
+        Vue.prototype.$api = {
+            'global': api(client)
+        }
     }
 }
