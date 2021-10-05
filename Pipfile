@@ -16,6 +16,10 @@ gunicorn = "*"
 stripe = "*"
 djangorestframework-jwt = "*"
 social-auth-app-django = "*"
+django-imagekit = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
 
 [dev-packages]
 

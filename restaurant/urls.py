@@ -1,14 +1,16 @@
 from django.conf import settings
+from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url
+from django.urls.conf import include
 
 from restaurant import views
 
 urlpatterns = [
-    url('', views.index, name='home'),
-    path('admin/', admin.site.urls),
+    path('api/v1/', include('api.urls')),
+    path('', views.index, name='home'),
+    path('admin/', admin.site.urls)
 ]
 
 if settings.DEBUG:
