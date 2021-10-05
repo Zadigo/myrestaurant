@@ -1,0 +1,54 @@
+[
+    {
+        "name": "Coca-Cola",
+        "flavors": [
+            "Original taste",
+            "Life",
+            "Energy Zero Sugar",
+            "With coffee",
+            "Zero Sugar Orange",
+            "Orange Vanilla",
+            "Cherry",
+            "Vanilla",
+            "Zero Sugar",
+            "Standard"
+        ]
+    },
+    {
+        "name": "Sprite",
+        "flavors": [
+            "Standard",
+            "Zero Sugar Cranberry",
+            "Cranberry",
+            "Zero Sugar"
+        ]
+    },
+    {
+        "name": "Fanta",
+        "flavors": [
+            "Orange",
+            "Grape",
+            "Pineapple",
+            "Orange Zero Sugar"
+        ]
+    },
+    {
+        "name": "Schweppes",
+        "flavors": [
+            "Ginger Ale",
+            "Soda",
+            "Mojito",
+            "Tonic Water"
+        ]
+    },
+    {
+        "name": "Minute Maid",
+        "flavors": [
+            "Original",
+            "Fruit Punch",
+            "Refreshment Lemonade",
+            "Apple Juice Box",
+            "Zero Sugar Lemonade"
+        ]
+    }
+]
