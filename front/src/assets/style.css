@@ -5,3 +5,27 @@ html {
 body {
   font-family: "Roboto" sans-serif;
 }
+
+
+/* Intro */
+
+#intro {
+  margin-top: 100px;
+}
+
+
+/* Utils */
+
+.shadow-5 {
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,.07),0 10px 10px -5px rgba(0,0,0,.05) !important;
+}
+
+.rounded-5 {
+  border-radius: .5rem !important;
+}
+
+.bg-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -8,8 +8,16 @@ Vue.use(Vuex)
 
 var store = new Vuex.Store({
     state: () => ({
-        
+        authenticated: true,
+        isAdmin: true,
+        isCashier: true
     }),
+
+    getters: {
+        isAuthenticated (state) {
+            return state.authenticated
+        }
+    },
 
     modules: {
         inventoryModule,

@@ -1,3 +1,3 @@
-var routesForHome = {}
+var routesForHome = []
 
 export default routesForHome

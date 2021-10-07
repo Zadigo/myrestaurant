@@ -1,11 +1,17 @@
 <template>
   <div id="app">
     <v-app>
+      <router-view :key="$route.name"></router-view>      
 
-      <transition name="general-transition">
-        <router-link :key="route.name"></router-link>      
-      </transition>
-    
+      <!-- <base-sidebar>
+        <template>
+          
+          <transition name="general-transition">
+          </transition>
+          
+        </template>
+      </base-sidebar> -->
+
     </v-app>
   </div>
 </template>
@@ -15,6 +21,12 @@ export default {
   name: 'App',
   components: {
 
+  },
+
+  data() {
+    return {
+      drawer: true
+    }
   }
 }
 </script>
@@ -22,6 +34,7 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
 @import url('./assets/style.css');
+@import url('./assets/sidebar.css');
 
 .general-transition-enter-active,
 .general-transition-leave-active {

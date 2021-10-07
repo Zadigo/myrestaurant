@@ -11,6 +11,14 @@ import store from './store'
 import router from './routes'
 import vuetify from './plugins/vuetify'
 
+// Components
+import BaseJumbotron from './components/BaseJumbotron.vue'
+import BaseBreadcrumbs from './components/BaseBreadcrumbs.vue'
+import BaseSidebar from './components/BaseSidebar.vue'
+
+import SidebarContainer from './components/sidebar/SidebarContainer.vue'
+Vue.component('sidebar-container', SidebarContainer)
+
 // Styling
 require('../node_modules/bootstrap/dist/css/bootstrap.min.css')
 library.add(faUser)
@@ -26,6 +34,9 @@ Vue.use(globalPlugin)
 
 // Components
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('base-jumbotron', BaseJumbotron)
+Vue.component('base-breadcrumbs', BaseBreadcrumbs)
+Vue.component('base-sidebar', BaseSidebar)
 
 // Mixins
 Vue.mixin(globalMixin)

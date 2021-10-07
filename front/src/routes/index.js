@@ -10,22 +10,56 @@ var routes = [
     ...routesForHome,
 
     {
+        path: '/tests',
+        name: 'tests',
+        component: () => import('../views/Tests.vue')
+    },
+
+    {
         path: '/restaurant',
-        name: 'restaurant',
-        components: { default: () => import(/* webpackChunkName "restaurant" */ '../views/Restaurant.vue') }
+        component: () => import(/* webpackChunkName "restaurant" */ '../views/Welcome.vue'),
+        props: route => ({ 
+            requiresHeading: route.path == '/restaurant' ? true : false,
+            requiresActionCart: route.name == 'restaurant_menu' ? true : false
+        }),
+        children: [
+            {
+                path: '',
+                name: 'restaurant',
+                components: { 
+                    items: () => import(/* webpackChunkName "restaurant" */ '../views/Introduction.vue')
+                }
+            },
+            {
+                path: ':slug([a-z-]+)',
+                name: 'restaurant_menus',
+                components: {
+                    items: () => import(/* webpackChunkName "restaurant" */ '../views/RestaurantMenus.vue')
+                }
+            },
+            {
+                path: ':slug([a-z-]+)/:name([a-z-]+)',
+                name: 'restaurant_menu',
+                components: {
+                    items: () => import(/* webpackChunkName "restaurant" */ '../views/ProductDetail.vue')
+                },
+                meta: { requiresItem: 'menu' }
+            }
+        ]
     },
     {
         path: '/cashier',
-        name: 'restaurant',
+        name: 'cashier',
         components: { default: () => import(/* webpackChunkName "cashier" */ '../views/Cashier.vue') },
         meta: {
             requiresAuthentication: true,
-            requiresCashier: true
+            requiresCashier: true,
+            requiresAdmin: false
         }
     },
     {
         path: '/payment',
-        name: 'restaurant',
+        name: 'payment',
         components: { default: () => import(/* webpackChunkName "payment" */ '../views/Payment.vue') }
     },
     {
@@ -34,7 +68,8 @@ var routes = [
         components: { default: () => import(/* webpackChunkName "statistics" */ '../views/Statistics.vue') },
         meta: {
             requiresAuthentication: true,
-            requiresAdmin: true
+            requiresAdmin: true,
+            requiresCashier: false
         }
     }
 ]
@@ -51,16 +86,16 @@ router.beforeEach((to, from, next) => {
         var requiresCashier = to.meta.requiresCashier
 
         if (store.getters['isAuthenticated']) {
-            if (requiresAdmin & store.getters['isAdmin']) {
+
+            if ((requiresAdmin & store.state.isAdmin) == 1) {
                 next()
-            } 
-    
-            if (requiresCashier & store.getters['isCashier']) {
+            } else if ((requiresCashier & store.state.isCashier) == 1) {
                 next()
+            } else {
+                next('login')
             }
         }
 
-        next('login')
     } else {
         next()
     }
