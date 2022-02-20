@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Menus",
+        "image": "http://via.placeholder.com/500x500",
+        "slug": "menus"
+    },
+    {
+        "name": "Novelties",
+        "image": "http://via.placeholder.com/500x500",
+        "slug": "novelties"
+    },
+    {
+        "name": "Snacks",
+        "image": "http://via.placeholder.com/500x500",
+        "slug": "snacks"
+    },
+    {
+        "name": "Desserts",
+        "image": "http://via.placeholder.com/500x500",
+        "slug": "desserts"
+    }
+]

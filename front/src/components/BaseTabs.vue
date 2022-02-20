@@ -1,7 +1,7 @@
 <template>
   <v-tabs @change="$emit('updateItems', tab)" v-model="tab">
     <v-tab v-for="(item, index) in tabs" :key="index">
-      {{ item }}
+      {{ $t(item) }}
     </v-tab>
 
     <slot></slot>
@@ -11,7 +11,12 @@
 <script>
 export default {
   name: 'BaseTabs',
-  props: ['tabs'],
+  props: {
+    tabs: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
       tab: null

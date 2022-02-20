@@ -10,7 +10,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import BaseChoices from './BaseChoices.vue'
+import BaseChoices from '../BaseChoices.vue'
 
 export default {
   name: 'Drinks',

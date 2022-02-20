@@ -1,23 +1,6 @@
 from django.contrib import admin
 
-from pickups.models import Drink, Menu, Pickup, Product
-
-
-@admin.register(Menu)
-class MenuAdmin(admin.ModelAdmin):
-    list_display = ['name', 'active']
-    filter_horizontal = ['products']
-    
-
-@admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'active']
-
-
-@admin.register(Drink)
-class DrinkAdmin(admin.ModelAdmin):
-    list_display = ['name', 'active']
-
+from pickups.models import Pickup
 
 @admin.register(Pickup)
 class PickupAdmin(admin.ModelAdmin):

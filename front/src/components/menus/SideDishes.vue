@@ -3,6 +3,7 @@
     <template>
 
       <v-tabs-items v-model="tab">
+        <!-- Sides -->
         <v-tab-item :value="0">
           <v-container>
             <v-row>
@@ -13,6 +14,7 @@
           </v-container>
         </v-tab-item>
 
+        <!-- Drinks -->
         <v-tab-item :value="1">
           <v-container>
             <v-row>
@@ -30,17 +32,17 @@
 
 <script>
 import { mapState } from 'vuex'
-import BaseTabs from './BaseTabs.vue'
+import BaseTabs from '../BaseTabs.vue'
 import Drinks from './Drinks.vue'
 
 export default {
-  name: 'DishSides',
+  name: 'SideDishes',
   components: { BaseTabs, Drinks },
   data() {
     return {
       tab: null,
       tabs: [
-        'Accompagnements', 'Boissons'
+        'Side dishes', 'Drinks'
       ],
       items: []
     }

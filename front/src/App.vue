@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <v-app>
-      <router-view :key="$route.name"></router-view>      
+      <base-navbar />
+
+      <transition name="general-transition">
+        <router-view :key="$route.name" />      
+      </transition>
 
       <!-- <base-sidebar>
         <template>
@@ -27,7 +31,14 @@ export default {
     return {
       drawer: true
     }
-  }
+  },
+
+  // beforeMount() {
+  //   var previouslySelectedLanguage = this.getItemFromLocalStorage('lang')
+  //   if (!_.isUndefined(previouslySelectedLanguage)) {
+  //     this.$i18.locale = previouslySelectedLanguage
+  //   }
+  // }
 }
 </script>
 
@@ -38,16 +49,22 @@ export default {
 
 .general-transition-enter-active,
 .general-transition-leave-active {
-  transition: all .3s ease;
+  transition: all .2s ease-out;
 }
 
 .general-transition-enter,
 .general-transition-leave-to {
   opacity: 0;
+  transform: translate(-5px);
 }
 
 .general-transition-leave,
 .general-transition-enter-to {
   opacity: 1;
+  transform: translate(0px);
+}
+
+.general-transition-move {
+  transition: all .3s ease;
 }
 </style>

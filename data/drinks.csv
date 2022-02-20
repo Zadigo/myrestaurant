@@ -1,0 +1,28 @@
+name,image,price_pre_tax,price_post_tax,active,flavor
+Coca-Cola,,0,0,False,Original taste
+Coca-Cola,,0,0,False,Life
+Coca-Cola,,0,0,False,Energy Zero Sugar
+Coca-Cola,,0,0,False,With coffee
+Coca-Cola,,0,0,False,Zero Sugar Orange
+Coca-Cola,,0,0,False,Orange Vanilla
+Coca-Cola,,0,0,False,Cherry
+Coca-Cola,,0,0,False,Vanilla
+Coca-Cola,,0,0,False,Zero Sugar
+Coca-Cola,,0,0,False,Standard
+Sprite,,0,0,False,Standard
+Sprite,,0,0,False,Zero Sugar Cranberry
+Sprite,,0,0,False,Cranberry
+Sprite,,0,0,False,Zero Sugar
+Fanta,,0,0,False,Orange
+Fanta,,0,0,False,Grape
+Fanta,,0,0,False,Pineapple
+Fanta,,0,0,False,Orange Zero Sugar
+Schweppes,,0,0,False,Ginger Ale
+Schweppes,,0,0,False,Soda
+Schweppes,,0,0,False,Mojito
+Schweppes,,0,0,False,Tonic Water
+Minute Maid,,0,0,False,Original
+Minute Maid,,0,0,False,Fruit Punch
+Minute Maid,,0,0,False,Refreshment Lemonade
+Minute Maid,,0,0,False,Apple Juice Box
+Minute Maid,,0,0,False,Zero Sugar Lemonade

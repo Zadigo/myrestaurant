@@ -32,8 +32,9 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'corsheaders',
+    'api',
     'channels',
-
+    'inventory',
     'pickups',
 ]
 
@@ -70,6 +71,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'restaurant.wsgi.application'
+
+ASGI_APPLICATION = 'restaurant.asgi.application'
 
 
 # Database
@@ -163,8 +166,8 @@ CORS_ORIGIN_REGEX_WHITELIST = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'localhost:8080',
-    '192.168.0.103:8080',
+    'http://localhost:8080',
+    'http://192.168.0.103:8080',
 ]
 
 REST_FRAMEWORK = {
@@ -176,7 +179,7 @@ REST_FRAMEWORK = {
 }
 
 
-# EMAIL
+# Email
 
 EMAIL_HOST = 'smtp.gmail.com'
 
@@ -195,4 +198,21 @@ EMAIL_USE_LOCALTIME = True
 
 INTERNAL_IPS = [
     '127.0.0.1'
+]
+
+
+# Restaurant
+
+OPENING_HOUR = '11:00 a.m'
+
+CLOSING_HOUR = '9:00 p.m'
+
+AVAILABILITIES = [
+    ('Monday', '11:00', '22:00'),
+    ('Tuesday', '11:00', '22:00'),
+    ('Wednesday', '11:00', '22:00'),
+    ('Thursday', '11:00', '22:00'),
+    ('Friday', '11:00', '22:00'),
+    ('Saturday', '11:00', '22:00'),
+    ('Sunday', '11:00', '22:00')
 ]

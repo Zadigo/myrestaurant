@@ -1,19 +1,17 @@
 export default ($axios) => ({
-    products: () => {
+    getProducts: () => {
         return $axios({
             url: '/products',
             method: 'get'
         })
     },
-
-    menus: () => {
+    getMenus: () => {
         return $axios({
             url: '/menus',
             method: 'get'
         })
     },
-
-    drinks: () => {
+    getDrinks: () => {
         return $axios({
             url: '/drinks',
             method: 'get'

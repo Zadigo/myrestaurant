@@ -1,8 +1,10 @@
-from api.serializers.menus import DrinkSerializer, MenuSerializer, ProductSerializer
-from pickups.models import Drink, Menu, Product
+from api.serializers.inventory import (DrinkSerializer, MenuSerializer,
+                                   ProductSerializer)
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
+from inventory.models import Drink, Menu, Product
 
 
 @api_view(['get'])

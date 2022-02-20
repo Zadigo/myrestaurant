@@ -1,12 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+import './plugins/local-storage'
+
+// Sessions
+import './plugins/sessions'
+
 // Font Awesome
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-import { library } from '@fortawesome/fontawesome-svg-core'
+import './plugins/fontawesome'
 
 // Router + Store
+import './i18n'
 import store from './store'
 import router from './routes'
 import vuetify from './plugins/vuetify'
@@ -15,13 +19,11 @@ import vuetify from './plugins/vuetify'
 import BaseJumbotron from './components/BaseJumbotron.vue'
 import BaseBreadcrumbs from './components/BaseBreadcrumbs.vue'
 import BaseSidebar from './components/BaseSidebar.vue'
-
 import SidebarContainer from './components/sidebar/SidebarContainer.vue'
-Vue.component('sidebar-container', SidebarContainer)
+import BaseNavbar from './components/BaseNavbar.vue'
 
-// Styling
-require('../node_modules/bootstrap/dist/css/bootstrap.min.css')
-library.add(faUser)
+// Bootstrap
+import './plugins/bootstrap-vue'
 
 // Plugins
 import globalPlugin from './plugins'
@@ -29,11 +31,14 @@ import globalPlugin from './plugins'
 // Mixins
 import globalMixin from './mixins'
 
+import i18n from './i18n'
+
 // Plugins
 Vue.use(globalPlugin)
 
 // Components
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('base-navbar', BaseNavbar)
+Vue.component('sidebar-container', SidebarContainer)
 Vue.component('base-jumbotron', BaseJumbotron)
 Vue.component('base-breadcrumbs', BaseBreadcrumbs)
 Vue.component('base-sidebar', BaseSidebar)
@@ -47,6 +52,6 @@ new Vue({
   router,
   store,
   vuetify,
-
-  render: h => h(App),
+  i18n,
+  render: h => h(App)
 }).$mount('#app')

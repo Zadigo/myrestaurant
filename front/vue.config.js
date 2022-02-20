@@ -7,6 +7,17 @@ module.exports = {
             }
         }
     },
+
     outputDir: './dist/',
     assetsDir: 'static',
+
+    pluginOptions: {
+      i18n: {
+        locale: 'fr',
+        fallbackLocale: 'en',
+        localeDir: 'locales',
+        enableInSFC: false,
+        enableBridge: false
+      }
+    }
 }

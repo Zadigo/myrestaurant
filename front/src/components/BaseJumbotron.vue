@@ -5,11 +5,11 @@
       <div :class="`col-${ col }`">
 
         <h1 :class="titleClassList" class="mb-3 h2" id="name" aria-label="Name">
-          {{ currentItem.lead }}
+          {{ currentItem.lead }} Some value 
         </h1>
 
         <p class="mb-3" id="description" aria-label="Description">
-          {{ currentItem.description }}
+          {{ currentItem.description }} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam eum non sequi porro at praesentium neque eius aliquid amet eveniet, velit, deleniti numquam dolores excepturi ipsa doloremque dolor ipsam! Accusamus!
         </p>
       </div>
     </div>

@@ -3,7 +3,7 @@
 from django.db import migrations, models
 import django.utils.timezone
 import imagekit.models.fields
-import pickups.utils
+import inventory.utils
 import uuid
 
 
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
-                ('image', imagekit.models.fields.ProcessedImageField(help_text='Image should be higher or equal to 400x400px', upload_to=pickups.utils.upload_to)),
+                ('image', imagekit.models.fields.ProcessedImageField(help_text='Image should be higher or equal to 400x400px', upload_to=inventory.utils.upload_to)),
                 ('price_pre_tax', models.DecimalField(decimal_places=2, default=1, max_digits=5)),
                 ('price_post_tax', models.DecimalField(decimal_places=2, default=1, max_digits=5)),
                 ('active', models.BooleanField(default=False)),
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
-                ('image', imagekit.models.fields.ProcessedImageField(help_text='Image should be higher or equal to 400x400px', upload_to=pickups.utils.upload_to)),
+                ('image', imagekit.models.fields.ProcessedImageField(help_text='Image should be higher or equal to 400x400px', upload_to=inventory.utils.upload_to)),
                 ('price_pre_tax', models.DecimalField(decimal_places=2, default=1, max_digits=5)),
                 ('price_post_tax', models.DecimalField(decimal_places=2, default=1, max_digits=5)),
                 ('active', models.BooleanField(default=False)),
