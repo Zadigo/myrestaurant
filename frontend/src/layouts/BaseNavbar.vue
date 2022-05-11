@@ -14,6 +14,9 @@
         <router-link :to="{ name: 'welcome_view' }" class="nav-link">
           Home
         </router-link>
+        <a href class="nav-link" @click.prevent="store.showFavoritesModal=true">
+          Favoris
+        </a>
         <a href class="nav-link" @click.prevent="store.showWebsiteMenu=true">
           Menu
         </a>

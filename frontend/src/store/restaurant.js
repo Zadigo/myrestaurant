@@ -4,7 +4,9 @@ const useRestaurant = defineStore('restaurant', {
     state: () => ({
         showDetailsModal: false,
         showDeliveryModal: false,
+        showFavoritesModal: false,
         showWebsiteMenu: false,
+        currentProductDetails: {},
         restaurantMenus: []
     }),
     actions: {

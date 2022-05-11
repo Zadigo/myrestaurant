@@ -22,6 +22,7 @@
 
     <!-- Modals -->
     <website-menu />
+    <favorites-menu />
 
     <!-- Footer -->
     <base-footer />
@@ -33,6 +34,7 @@ import BaseFooter from '@/layouts/BaseFooter.vue'
 import BaseNavbar from '@/layouts/BaseNavbar.vue'
 import BaseSidebar from '@/layouts/BaseSidebar.vue'
 import WebsiteMenu from './components/restaurant/WebsiteMenu.vue'
+import FavoritesMenu from './components/restaurant/FavoritesMenu.vue'
 
 export default {
   name: 'App',
@@ -40,7 +42,8 @@ export default {
     BaseFooter,
     BaseNavbar,
     BaseSidebar,
-    WebsiteMenu
+    WebsiteMenu,
+    FavoritesMenu
 }
 }
 </script>
