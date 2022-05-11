@@ -19,7 +19,7 @@ import BaseOffcanvas from '@/layouts/BaseOffcanvas.vue'
 
 export default {
   components: { BaseOffcanvas },
-  name: 'FavoritesMenu',
+  name: 'FavoritesModal',
   computed: {
     ...mapWritableState(useRestaurant, ['showFavoritesModal'])
   }
