@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import Index, UniqueConstraint
-from imagekit.models import ProcessedImageField
+from imagekit.models import ProcessedImageField, ImageSpecField
 from imagekit.processors import ResizeToFill
 
 from inventory.utils import calculate_vat, upload_to
@@ -8,6 +8,11 @@ from inventory.utils import calculate_vat, upload_to
 
 class AbstractInventory(models.Model):
     name = models.CharField(max_length=100)
+    
+    # original = models.ImageField(upload_to=None)
+    # thumbnail = ImageSpecField(source='original', processors=[ResizeToFill(200, 200)], upload_to=upload_to, format='JPEG', options={'quality': 80})
+    # banner = ImageSpecField(source='original', processors=[ResizeToFill(1200, 400)], upload_to=upload_to, format='JPEG')
+    
     image = ProcessedImageField(
         processors=[ResizeToFill(400, 400)],
         upload_to=upload_to,

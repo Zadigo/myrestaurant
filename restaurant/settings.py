@@ -151,10 +151,12 @@ MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# Site
+
 SITE = 1
 
 
-# CORS
+# Cors
 
 CORS_ORIGIN_ALLOW_ALL = False
 
@@ -169,6 +171,9 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8080',
     'http://192.168.0.103:8080',
 ]
+
+
+# Rest
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

@@ -5,13 +5,19 @@ module.exports = {
         'vetur.experimental.templateInterpolationService': true
     },
     projects: [
-        // '.',
+        '.',
         {
             root: './front',
-            package: './package.json',
+            package: 'package.json',
             globalComponents: [
-                './src/components/**/*.vue',
-                './src/views/**/*.vue',
+                './src/**/*.vue',
+            ]
+        },
+        {
+            root: 'frontend',
+            package: 'package.json',
+            globalComponents: [
+                './src/**/*.vue'
             ]
         },
         {
