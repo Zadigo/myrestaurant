@@ -13,6 +13,10 @@
           variables and mixins, responsive grid system, extensive prebuilt components, 
           and powerful JavaScript plugins.
         </p>
+
+        <p @click="store.showDeliveryModal=true">
+          Livraison
+        </p>
         
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
           <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Primary button</button>
@@ -36,6 +40,7 @@
 
     <!-- Modals -->
     <details-modal :show="store.showDetailsModal" @close-modal="store.toggleModal" />
+    <delivery-modal :show="store.showDeliveryModal" />
   </section>
 </template>
 
@@ -45,6 +50,7 @@ import { useRestaurant } from '@/store/restaurant'
 import BaseBreadcrumbs from '@/layouts/BaseBreadcrumbs.vue'
 import DetailsModal from '@/components/restaurant/DetailsModal.vue'
 import BaseCardLoadingVue from '@/layouts/BaseCardLoading.vue'
+import DeliveryModal from '@/components/restaurant/DeliveryModal.vue'
 
 export default {
   name: 'MenusView',
@@ -55,16 +61,17 @@ export default {
     }
   },
   components: {
-    BaseBreadcrumbs, 
+    BaseBreadcrumbs,
     DetailsModal,
+    DeliveryModal,
     asyncListMenuDetails: defineAsyncComponent({
-      loader: () => import('@/components/restaurant/ListMenuDetails.vue'),
-      loadingComponent: null,
-      delay: 30000,
-      errorComponent: BaseCardLoadingVue,
-      timeout: 300
+        loader: () => import("@/components/restaurant/ListMenuDetails.vue"),
+        loadingComponent: null,
+        delay: 30000,
+        errorComponent: BaseCardLoadingVue,
+        timeout: 300
     })
-  }
+}
 }
 </script>
 

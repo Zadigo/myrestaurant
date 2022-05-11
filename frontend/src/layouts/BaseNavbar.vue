@@ -6,18 +6,33 @@
         Restaurant
       </router-link>
 
+      <form class="d-flex" @submit.prevent>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
       <div id="navbar-nav" class="collapse navbar-collapse">
         <router-link :to="{ name: 'welcome_view' }" class="nav-link">
           Home
         </router-link>
+        <a href class="nav-link" @click.prevent="store.showWebsiteMenu=true">
+          Menu
+        </a>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import { useRestaurant } from "@/store/restaurant"
+
 export default {
-  name: 'BaseNavbar'  
+  name: 'BaseNavbar',
+  setup() {
+    var store = useRestaurant()
+    return {
+      store
+    }
+  }
 }
 </script>
 

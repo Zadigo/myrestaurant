@@ -20,6 +20,10 @@
       </div>
     </section>
 
+    <!-- Modals -->
+    <website-menu />
+
+    <!-- Footer -->
     <base-footer />
   </section>
 </template>
@@ -28,14 +32,16 @@
 import BaseFooter from '@/layouts/BaseFooter.vue'
 import BaseNavbar from '@/layouts/BaseNavbar.vue'
 import BaseSidebar from '@/layouts/BaseSidebar.vue'
+import WebsiteMenu from './components/restaurant/WebsiteMenu.vue'
 
 export default {
   name: 'App',
   components: {
     BaseFooter,
     BaseNavbar,
-    BaseSidebar
-  }
+    BaseSidebar,
+    WebsiteMenu
+}
 }
 </script>
 
