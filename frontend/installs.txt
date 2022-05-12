@@ -77,7 +77,7 @@ module.exports = {
     assetsDir: 'static'
 }
 
-npm install vitest @vue/test-util@next happy-dom
+npm install vitest @vue/test-utils@next happy-dom
 
 npm i --save @fortawesome/fontawesome-svg-core
 npm i --save @fortawesome/free-solid-svg-icons
