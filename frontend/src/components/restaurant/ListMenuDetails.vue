@@ -1,18 +1,21 @@
 <template>
   <div class="row">
-    <div v-for="product in 15" :key="product" class="col-4">
-      <a href class="text-dark" @click.prevent="showProductDetails(product)">
-        <div class="card shadow-sm my-1">
+    <div v-for="item in store.availableMenus" :key="item" class="col-5">
+      <a href class="text-dark" @click.prevent="showProductDetails(item)">
+        <div :aria-label="item.name" class="card shadow-sm my-1">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="http://via.placeholder.com/400x400" class="img-fluid rounded-start" alt="...">
+              <img :src="require('@/assets/burger3.jpg')" :alt="item.name" class="img-fluid rounded-start">
             </div>
 
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">{{ item.name }}</h5>
+                <p class="mb-1">{{ truncate(item.description, 20) }}</p>
                 <p class="card-text">
-                  <small class="text-muted">200€</small>
+                  <small class="text-muted">
+                    {{ item.price_post_tax }}
+                  </small>
                 </p>
               </div>
             </div>
@@ -25,13 +28,15 @@
 
 <script>
 import { useRestaurant } from '@/store/restaurant'
+import { truncate } from '@/utils'
 
 export default {
   name: 'ListMenuDetails',
   setup() {
     var store = useRestaurant()
     return {
-      store
+      store,
+      truncate
     }
   },
   created() {
@@ -40,18 +45,17 @@ export default {
   methods: {
     async getMenus() {
       try {
-        var response = await this.axios.get('https://jsonplaceholder.typicode.com/todos')
+        var response = await this.axios.get('/inventory/menus')
         this.store.$patch((state) => {
-          state.restaurantMenus = response.data
+          state.availableMenus = response.data
         })
       } catch(error) {
         console.log(error)
       }
     },
-    showProductDetails(product) {
-      product
+    showProductDetails(item) {
       this.store.$patch((state) => {
-        state.currentProductDetails = {'name': 'Test name'}
+        state.currentProductDetails = item
         state.showDetailsModal = true
       })
     }

@@ -1,6 +1,6 @@
 from rest_framework.serializers import Serializer
 from rest_framework import fields
-from pickups.serializers import DrinkSerializer, MenuSerializer
+from inventory.serializers import DrinkSerializer, MenuSerializer
 from inventory.models import Drink, Menu, Product
 from django.shortcuts import get_list_or_404
 from pickups.models import Pickup

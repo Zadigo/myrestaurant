@@ -12,7 +12,7 @@
         <div class="modal-body">
           <slot />
         </div>
-        {{ $slots }}
+
         <div v-if="$slots.modalFooter" class="modal-footer">
           <slot name="modal-footer" />
         </div>

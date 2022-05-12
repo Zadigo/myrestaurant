@@ -5,6 +5,7 @@ from rest_framework import fields
 class AbstractInventorySerializer(Serializer):
     id = fields.IntegerField(read_only=True)
     name = fields.CharField(read_only=True)
+    description = fields.CharField(read_only=True)
     image = fields.URLField()
     slug = fields.SlugField()
     highlight_as_new = fields.BooleanField()
@@ -24,5 +25,5 @@ class ProductSerializer(AbstractInventorySerializer):
 
 class MenuSerializer(AbstractInventorySerializer):
     """Returns the available menus in the restaurant"""
-    drink = DrinkSerializer()
+    drinks = DrinkSerializer(many=True)
     products = ProductSerializer(many=True)

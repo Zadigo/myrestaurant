@@ -2,12 +2,23 @@
 from uuid import uuid4
 
 from django.db import models
+from django.db.models import Sum
 from django.db.models.indexes import Index
 from django.utils import timezone
 from inventory.models import Drink, Menu
+
 from pickups.managers import PickupManager
-from django.db.models import Sum
 from pickups.utils import calculate_vat
+
+
+# class PickupHistory(models.Model):
+#     """Tracks purchases at the current price they were
+#     bought. This avoids the impact of price
+#     modifications on items during the lifecycle 
+#     of the restaurant"""
+#     menu = models.ForeignKey(Menu, on_delete=models.SET_NULL)
+    
+
 
 class Pickup(models.Model):
     reference = models.UUIDField(default=uuid4, unique=True)
@@ -40,14 +51,14 @@ class Pickup(models.Model):
     def clean(self):
         # Calculate the total of the order
         # on save so that we do not have to
-        # recalculate it single everytime
+        # recalculate it everytime
         if self.total_pre_tax == 0:
             selected_menus = self.menus.aggregate(Sum('price_pre_tax'))
             extra_drinks = self.drinks.aggregate(Sum('price_pre_tax'))
             total = sum(
-                    [
-                        selected_menus['price_pre_tax__sum'] or 0,
-                        extra_drinks['price_pre_tax__sum'] or 0
+                [
+                    selected_menus['price_pre_tax__sum'] or 0,
+                    extra_drinks['price_pre_tax__sum'] or 0
                 ]
             )
             self.total_pre_tax = total

@@ -1,26 +1,37 @@
 <template>
   <section id="menus">
     <!-- Heading -->
-    <div class="text-center border-bottom">
-      <base-breadcrumbs current-page="Notre carte" />
-      
-      <h1 class="display-4 fw-bold">Centered screenshot</h1>
+    <div class="border-bottom text-left p-5 ps-0">
+      <div class="row">
+        <div class="col-4 position-relative">
+          <img :src="require('@/assets/burger1.jpg')" alt="Menus illustration" class="img-fluid rounded-1 shadow">
+          <button class="btn btn-sm btn-danger position-absolute top-0 m-3 shadow-none" style="left:65%;">
+            heart
+          </button>
+        </div>
 
-      <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">
-          Quickly design and customize responsive mobile-first sites with Bootstrap, 
-          the world’s most popular front-end open source toolkit, featuring Sass 
-          variables and mixins, responsive grid system, extensive prebuilt components, 
-          and powerful JavaScript plugins.
-        </p>
+        <div class="col-8">
+          <base-breadcrumbs current-page="Notre carte" />
+          <h1 class="display-6 fw-bold">Notre carte</h1>
+          <p class="m-0 text-muted">25 - 45 min · Burgers · Halal</p>
 
-        <p @click="store.showDeliveryModal=true">
-          Livraison
-        </p>
+          <div class="btn-group my-3 shadow-none">
+            <button class="btn btn-md btn-outline-info">
+              Information
+            </button>
+  
+            <button class="btn btn-md btn-outline-danger" @click="store.showDeliveryModal=true">
+              Livraison
+            </button>
+          </div>
         
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Primary button</button>
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+          <div class="d-flex justify-content-left">
+            <span class="me-2">Icon</span>
+            <div>
+              <p class="m-0 fw-normal text-info">Gagnez des récompenses</p>
+              <p class="m-0 fw-light">15 € min. de commande • Passez 4 commandes et obtenez 8 €</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

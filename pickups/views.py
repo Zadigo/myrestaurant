@@ -1,4 +1,4 @@
-from api.serializers.pickups import PickupSerializer, ValidatePickupSerializer
+from pickups.serializers import PickupSerializer, ValidatePickupSerializer
 from django.shortcuts import get_list_or_404, render
 from rest_framework import serializers, status
 from rest_framework.decorators import api_view

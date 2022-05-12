@@ -8,7 +8,11 @@ from inventory.utils import calculate_vat, upload_to
 
 class AbstractInventory(models.Model):
     name = models.CharField(max_length=100)
-    
+    description = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True
+    )
     # original = models.ImageField(upload_to=None)
     # thumbnail = ImageSpecField(source='original', processors=[ResizeToFill(200, 200)], upload_to=upload_to, format='JPEG', options={'quality': 80})
     # banner = ImageSpecField(source='original', processors=[ResizeToFill(1200, 400)], upload_to=upload_to, format='JPEG')
@@ -42,6 +46,7 @@ class AbstractInventory(models.Model):
 
 class Product(AbstractInventory):
     is_dessert = models.BooleanField(default=False)
+    # requires_cooking_state = models.BooleanField(default=False, help_text='Specific to a product with meat that might require a cooking state')
     
     class Meta:
         constraints = [
@@ -73,14 +78,11 @@ class Drink(AbstractInventory):
     
 
 class Menu(AbstractInventory):
+    """Menus created by the restaurant for the customer"""
     todays_specials = models.BooleanField(default=False)
-    products = models.ManyToManyField(Product)
-    drink = models.ForeignKey(
-        Drink,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True
-    )
+    products = models.ManyToManyField(Product, help_text='Available food items for the given menu')
+    drinks = models.ManyToManyField(Drink, help_text='Available drinks for the given menu')
+    # requires_cooking_state = models.BooleanField(default=False, help_text='This specific to items in the menu e.g. meat that might require a cooking state')
 
     class Meta:
         constraints = [
