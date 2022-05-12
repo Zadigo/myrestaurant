@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import Index, UniqueConstraint
-from imagekit.models import ProcessedImageField, ImageSpecField
+from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
 
 from inventory.utils import calculate_vat, upload_to
@@ -38,7 +38,6 @@ class AbstractInventory(models.Model):
         
         # Create slug
         self.slug = str(self.name).replace(' ', '-').lower()
-
 
 
 class Product(AbstractInventory):

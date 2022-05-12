@@ -2,7 +2,7 @@
   <section id="menus">
     <!-- Heading -->
     <div class="text-center border-bottom">
-      <base-breadcrumbs />
+      <base-breadcrumbs current-page="Notre carte" />
       
       <h1 class="display-4 fw-bold">Centered screenshot</h1>
 

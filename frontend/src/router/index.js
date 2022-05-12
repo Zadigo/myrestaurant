@@ -13,6 +13,26 @@ const router = createRouter({
             path: '/restaurant-menu/menus',
             name: 'menus_view',
             component: loadView('restaurant/MenusView')
+        },
+        {
+            path: '/about',
+            name: 'about_view',
+            component: loadView('restaurant/MenusView')
+        },
+        {
+            path: '/join-us',
+            name: 'join_us_view',
+            component: loadView('restaurant/MenusView')
+        },
+        {
+            path: '/contact-us',
+            name: 'contact_us_view',
+            component: loadView('restaurant/MenusView')
+        },
+        {
+            path: '/faq',
+            name: 'faq_view',
+            component: loadView('restaurant/MenusView')
         }
     ]
 })

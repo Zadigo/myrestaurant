@@ -7,7 +7,8 @@ from django.urls.conf import include
 from restaurant import views
 
 urlpatterns = [
-    path('api/v1/', include('api.urls')),
+    path('api/v1/inventory/', include('inventory.urls')),
+    path('api/v1/pickups/', include('pickups.urls')),
     path('', views.index, name='home'),
     path('admin/', admin.site.urls)
 ]

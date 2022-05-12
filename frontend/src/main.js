@@ -1,5 +1,5 @@
 import { createPinia } from 'pinia'
-import { createApp } from 'vue'
+import { createApp, ref, toRef } from 'vue'
 import VueAxios from 'vue-axios'
 import App from './App.vue'
 import i18n from './i18n'
@@ -11,6 +11,23 @@ require('bootstrap/dist/css/bootstrap.min.css')
 require('mdb-ui-kit/css/mdb.min.css')
 
 const pinia = createPinia()
+
+var currentSite = ref('base-site')
+
+pinia.use(({ store }) => {
+    store.$state.currentSite = currentSite
+    store.currentSite = currentSite
+
+    store.currentSite = toRef(store.$state, 'currentSite')
+
+    function getBaseSite() {
+        store.currentSite = 'base-site'
+    }
+
+    return {
+        getBaseSite
+    }
+})
 
 const app = createApp(App)
 app.use(pinia)

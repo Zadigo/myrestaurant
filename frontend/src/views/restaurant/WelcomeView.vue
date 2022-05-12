@@ -1,6 +1,6 @@
 <template>
   <section id="welcome">
-    <base-breadcrumbs />
+    <base-breadcrumbs current-page="Welcome" />
 
     <h1 class="text-uppercase fw-bold">Notre carte</h1>
     <p>Aucune excuse, faites-vous plaisir : il y en a pour tous les goûts !</p>
