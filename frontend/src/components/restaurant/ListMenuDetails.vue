@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div id="menus" class="row">
     <div v-for="item in store.availableMenus" :key="item" class="col-5">
       <a href class="text-dark" @click.prevent="showProductDetails(item)">
         <div :aria-label="item.name" class="card shadow-sm my-1">
@@ -40,7 +40,9 @@ export default {
     }
   },
   created() {
-    this.getMenus()
+    if (this.store.availableMenus.length == 0) {
+      this.getMenus()
+    }
   },
   methods: {
     async getMenus() {

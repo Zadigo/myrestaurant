@@ -3,15 +3,15 @@
     <base-breadcrumbs current-page="Welcome" />
 
     <h1 class="text-uppercase fw-bold">Notre carte</h1>
-    <p>Aucune excuse, faites-vous plaisir : il y en a pour tous les goûts !</p>
+    <p class="fw-light">Aucune excuse, faites-vous plaisir : il y en a pour tous les goûts !</p>
     
     <div class="row mt-5">
-      <div v-for="i in 6" :key="i" class="col-3 my-1">
-        <div class="card shadow-sm rounded-0">
-          <router-link :to="{ name: 'menus_view' }">
-            <img :alt="i" class="card-img-top" src="http://via.placeholder.com/400x400">
+      <div v-for="link in welcomeLinks" :key="link.name" class="col-3 my-1">
+        <div class="card shadow-sm">
+          <router-link :to="{ name: link.name }">
+            <img :alt="link.text" :src="require('@/assets/burger3.jpg')" class="card-img-top">
             <div class="card-body">
-              Some card {{ i }}
+              {{ link.text }}
             </div>
           </router-link>
         </div>
@@ -22,9 +22,15 @@
 
 <script>
 import BaseBreadcrumbs from '@/layouts/BaseBreadcrumbs.vue'
+import welcomeLinks from '@/data/welcome.json'
 
 export default {
   name: 'WelcomeView',
   components: { BaseBreadcrumbs },
+  setup() {
+    return {
+      welcomeLinks
+    }
+  }
 }
 </script>

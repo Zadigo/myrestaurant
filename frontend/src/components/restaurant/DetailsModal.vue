@@ -127,24 +127,24 @@ export default {
       return false
     }
   },
-  created() {
-    if (this.store.availableDrinks.length == 0) {
-      this.getDrinks()
-    } else {
-      // Get the drinks from the session or the localstorage
-    }
-  },
-  methods: {
-    async getDrinks() {
-      try {
-        var response = await this.axios.get('/inventory/drinks')
-        this.store.$patch({
-          drinks: response.data
-        })
-      } catch(error) {
-        console.error(error)
-      }
-    }
-  }
+  // created() {
+  //   if (this.store.availableDrinks.length == 0) {
+  //     this.getDrinks()
+  //   } else {
+  //     // Get the drinks from the session or the localstorage
+  //   }
+  // },
+  // methods: {
+  //   async getDrinks() {
+  //     try {
+  //       var response = await this.axios.get('/inventory/drinks')
+  //       this.store.$patch({
+  //         availableDrinks: response.data
+  //       })
+  //     } catch(error) {
+  //       console.error(error)
+  //     }
+  //   }
+  // }
 }
 </script>

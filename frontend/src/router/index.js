@@ -10,8 +10,13 @@ const router = createRouter({
             component: loadView('restaurant/WelcomeView')
         },
         {
-            path: '/restaurant-menu/menus',
+            path: '/restaurant/menus',
             name: 'menus_view',
+            component: loadView('restaurant/MenusView')
+        },
+        {
+            path: '/restaurant/desserts',
+            name: 'desserts_view',
             component: loadView('restaurant/MenusView')
         },
         {

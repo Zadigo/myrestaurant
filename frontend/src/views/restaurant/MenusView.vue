@@ -1,7 +1,7 @@
 <template>
   <section id="menus">
     <!-- Heading -->
-    <div class="border-bottom text-left p-5 ps-0">
+    <div class="text-left p-5 ps-0 position-relative">
       <div class="row">
         <div class="col-4 position-relative">
           <img :src="require('@/assets/burger1.jpg')" alt="Menus illustration" class="img-fluid rounded-1 shadow">
@@ -33,7 +33,17 @@
             </div>
           </div>
         </div>
+
+        <div class="col-12">
+          <div class="quick-menu w-100 d-flex justify-content-around p-4 mt-5 border-top border-bottom">
+            <button class="btn btn-md btn-primary btn-rounded" @click="goToSection()">Menu</button>
+            <button class="btn btn-md btn-primary btn-rounded">Le burger braisé</button>
+            <button class="btn btn-md btn-primary btn-rounded">Starters</button>
+            <button class="btn btn-md btn-primary btn-rounded">Desserts</button>
+          </div>
+        </div>
       </div>
+
     </div>
 
     <!-- Content -->
@@ -78,11 +88,16 @@ export default {
     asyncListMenuDetails: defineAsyncComponent({
         loader: () => import("@/components/restaurant/ListMenuDetails.vue"),
         loadingComponent: null,
-        delay: 30000,
+        delay: 200,
         errorComponent: BaseCardLoadingVue,
         timeout: 300
     })
-}
+  },
+  methods: {
+    goToSection() {
+      document.querySelector('#menus').scrollIntoView()
+    }
+  }
 }
 </script>
 
