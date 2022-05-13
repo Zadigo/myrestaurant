@@ -1,5 +1,5 @@
 <template>
-  <section id="payment">
+  <section id="payment" class="vh-100">
     <header>
       <nav class="navbar navbar-expand-lg bg-transparent">
         <div id="navbar-nav" class="collapse navbar-collapse">
@@ -23,10 +23,10 @@
               <div class="card">
                 <div class="card-body">
                   <div class="border rounded-sm">
-                    <div>
+                    <div class="p-3">
                       <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Je veux des couverts</label>
                       </div>
                       <p class="font-weight-bold">Couverts</p>
                       <p>Aidez-nous à réduire les déchets : ne demandez des couverts que si vous en avez besoin.</p>
@@ -34,34 +34,34 @@
                   </div>
 
                   <!-- TODO: Make this reusable -->
-                  <div class="d-flex justify-content-between">
+                  <div class="d-flex justify-content-between mt-3 mb-1">
                     <div class="fw-bold">Adresse de livraison</div>
-                    <div class="text-muted">Livraison</div>
+                    <div class="text-muted">Modifier</div>
                   </div>
 
-                  <div class="border rounded-sm">
+                  <div class="border rounded-sm p-3">
                     1 Rue de Paris, Paris 75001
                     +33 6 00 00 00 00
                   </div>
 
-                  <div class="d-flex justify-content-between">
+                  <div class="d-flex justify-content-between mt-3 mb-1">
                     <div class="fw-bold">Instructions de livraison</div>
-                    <div class="text-muted">Livraison</div>
+                    <div class="text-muted">Modifier</div>
                   </div>
 
-                  <div class="d-flex justify-content-between">
+                  <div class="d-flex justify-content-between mt-3 mb-1">
                     <div class="fw-bold">Mode paiement</div>
-                    <div class="text-muted">Livraison</div>
+                    <div class="text-muted">Modifier</div>
                   </div>
 
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
+                  <div class="form-check my-4">
+                    <input v-model="consent" class="form-check-input" type="checkbox" name="consent" id="consent">
+                    <label class="form-check-label" for="consent">
                       J'ai lu et j'accepte les nouvelles conditions générales.
                     </label>
                   </div>
 
-                  <button class="btn btn-block btn-primary">
+                  <button class="btn btn-block btn-primary bn-lg" @click="doPayment">
                     Commander avec livraison
                   </button>
                 </div>
@@ -69,6 +69,7 @@
             </div>
           </div>
         </div>
+        
         <div class="col-4">
           <div class="card">
             <div class="card-body">
@@ -122,3 +123,42 @@
     </div>
   </section>
 </template>
+
+<script>
+import { useRestaurant } from '@/store/restaurant'
+
+export default {
+  name: 'PaymentView',
+  setup() {
+    var store = useRestaurant()
+    store.$subscribe(({ type }) => {
+      console.log(type)
+    })
+    return {
+      store
+    }
+  },
+  data: () => ({
+    consent: false
+  }),
+  beforeMount() {
+    // Check if the user has orders in order
+    // to be able to access this page
+  },
+  methods: {
+    async doPayment() {
+      try {
+        this.store.$patch((state) => {
+          state.currentOrder = { reference: 'b044cb79-e209-4ad5-8a59-493736932cb7' }
+          this.$router.push({ name: 'customer_order_view', params: { reference: 'b044cb79-e209-4ad5-8a59-493736932cb7' } })
+        })
+      } catch(error) {
+        console.error(error)
+      }
+    },
+    async getCart() {
+      // Do something
+    }
+  }
+}
+</script>

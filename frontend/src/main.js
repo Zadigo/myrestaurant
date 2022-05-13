@@ -21,11 +21,16 @@ pinia.use(({ store }) => {
     store.currentSite = toRef(store.$state, 'currentSite')
 
     function getBaseSite() {
-        store.currentSite = 'base-site'
+        store.currentSite = 'base-site-vue'
+    }
+
+    function getGenericSite() {
+        store.currentSite = 'generic-site-vue'
     }
 
     return {
-        getBaseSite
+        getBaseSite,
+        getGenericSite
     }
 })
 

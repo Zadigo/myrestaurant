@@ -9,7 +9,9 @@ const useRestaurant = defineStore('restaurant', {
         currentProductDetails: {},
         
         availableDrinks: [],
-        availableMenus: []
+        availableMenus: [],
+
+        currentOrder: {}
     }),
     actions: {
         toggleModal() {

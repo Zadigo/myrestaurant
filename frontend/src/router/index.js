@@ -1,3 +1,4 @@
+import { useRestaurant } from '@/store/restaurant'
 import { loadView } from '@/utils'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -38,8 +39,31 @@ const router = createRouter({
             path: '/faq',
             name: 'faq_view',
             component: loadView('restaurant/MenusView')
+        },
+        {
+            path: '/payment',
+            name: 'payment_view',
+            component: loadView('restaurant/PaymentView')
+        },
+        {
+            path: '/customer-order/:reference([a-zA-Z0-9-]+)',
+            name: 'customer_order_view',
+            component: loadView('restaurant/CustomerOrderView')
         }
     ]
+})
+
+router.beforeEach((to, from, next) => {
+    var requiresFullPage = ['payment_view', 'customer_order_view']
+    var store = useRestaurant()
+    
+    if (requiresFullPage.includes(to.name)) {
+        store.getGenericSite()
+    } else {
+        store.getBaseSite()
+    }
+
+    next()
 })
 
 export default router

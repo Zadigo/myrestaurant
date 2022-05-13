@@ -6,7 +6,8 @@
 import { useRestaurant } from './store/restaurant'
 import { storeToRefs } from 'pinia'
 
-import BaseSite from '@/layouts/BaseSite.vue'
+import BaseSiteVue from '@/layouts/BaseSite.vue'
+import GenericSiteVue from '@/layouts/GenericSite.vue'
 
 export default {
   name: 'App',
@@ -18,7 +19,8 @@ export default {
     }
   },
   components: {
-    BaseSite
+    BaseSiteVue,
+    GenericSiteVue
   }
 }
 </script>

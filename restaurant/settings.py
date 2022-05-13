@@ -221,3 +221,20 @@ AVAILABILITIES = [
     ('Saturday', '11:00', '22:00'),
     ('Sunday', '11:00', '22:00')
 ]
+
+
+# Channels
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+    # 'default': {
+    #     'BACKEND': 'channels_redis.core.RedisChannelLayer',
+    #     'CONFIG': {
+    #         # 'hosts': [('localhost', 6379)],
+    #         'hosts': ['redis://:touparet@127.0.0.1:6379/0'],
+    #         'symmetric_encryption_keys': [SECRET_KEY],
+    #     },
+    # },
+}
