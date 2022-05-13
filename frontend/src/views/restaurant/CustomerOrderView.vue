@@ -6,7 +6,7 @@
 
 <script>
 // import ReconnectingWebsocket from 'reconnecting-websocket'
-
+import { socketSendMessage } from '@/utils'
 export default {
   name: 'CustomerOrderView',
   data: () => ({
@@ -38,9 +38,9 @@ export default {
     var socket = new WebSocket(url.toString())
 
     socket.onopen = () => {
-      socket.send({type: 'order.confirmed', order: {
+      socket.send(socketSendMessage('order.confirmed', {
         reference: this.$route.params.reference
-      }})
+      }))
     }
     
     socket.onclose = (e) => {

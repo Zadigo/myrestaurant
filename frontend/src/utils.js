@@ -293,6 +293,47 @@ function getVerticalScrollPercentage(el) {
     return (el.scrollTop || parent.scrollTop) / (parent.scrollHeight - parent.clientHeight) * 100
 }
 
+function quickSort(items) {
+    return items.sort((a, b) => {
+        return a - b
+    })
+}
+
+function websocketProtocol() {
+    var protocol = window.location.protocol
+    var socketProtocol = 'ws://'
+    if (protocol === 'https:') { socketProtocol = 'wss://' }
+    return socketProtocol
+}
+
+function websocketRootAddress(host, path) {
+    var protocol = websocketProtocol()
+    if (!host) { host = window.location.host }
+    var base = new URL(path, protocol + host)
+    return base
+
+}
+
+function socketSendMessage(type, items) {
+    if (!items) { items = {} }
+    return JSON.stringify({
+        type: type,
+        ...items
+    })
+}
+
+function rebuildPath(path) {
+    var instance = new URL(path, window.location.href)
+    return instance.toString()
+}
+
+function hasNull(values) {
+    return _.some(values, (value) => {
+        return value == null || value == undefined || value == ""
+    })
+}
+
+
 export {
     buildLimitOffset,
     capitalizeFirstLetter,
@@ -305,6 +346,7 @@ export {
     getNextItemFromList,
     getAutoComplete,
     getFieldType,
+    hasNull,
     indexElements,
     increaseIndex,
     incrementLastId,
@@ -316,8 +358,13 @@ export {
     mediaUrl,
     readFile,
     readMultipleFiles,
+    rebuildPath,
     scrollToSection,
     searchHelper,
     scrollToTop,
-    truncate
+    socketSendMessage,
+    truncate,
+    websocketProtocol,
+    websocketRootAddress,
+    quickSort
 }

@@ -1,6 +1,5 @@
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-from django.shortcuts import get_object_or_404
 from pickups.models import Pickup
 
 
@@ -22,24 +21,23 @@ class CustomerOrderConsumer(AsyncJsonWebsocketConsumer):
     """Connection used by the customer to check
     his specific order"""
     @database_sync_to_async
-    def get_customer_order(self, reference):
-        pickup = None
+    def get_customer_order(self):
         try:
+            reference = self.scope['url_route']['kwargs']['reference']
             pickup = Pickup.objects.get(reference=reference)
         except:
+            return None
+        else:
             return pickup
         
     async def connect(self):
-        self.accept()
-        # reference = self.scope['url_route']['kwargs']['reference']
-        # pickup = await self.get_customer_order(reference=reference)
-        
-        # if pickup is None:
-        #     await self.send_json({'method': 'failed_authentication'})
-        #     await self.close()
-        # else:
-        #     await self.accept()
-        #     await self.channel_layer.group_add('customer_orders', self.channel_name)
+        pickup = await self.get_customer_order()
+
+        if pickup is None:
+            await self.close()
+        else:
+            await self.accept()
+            await self.channel_layer.group_add('customer_orders', self.channel_name)
     
     async def disconnect(self, code):
         await self.channel_layer.group_discard('customer_orders', self.channel_name)
@@ -47,3 +45,6 @@ class CustomerOrderConsumer(AsyncJsonWebsocketConsumer):
     
     async def receive_json(self, content, **kwargs):
         await self.channel_layer.group_send('customer_orders', content)
+
+    async def order_confirmed(self, content, **kwargs):
+        print('OK', content, kwargs)

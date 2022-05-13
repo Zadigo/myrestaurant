@@ -15,6 +15,6 @@ application = ProtocolTypeRouter({
     'http': get_asgi_application(),
     'websocket': OriginValidator(
         AuthMiddlewareStack(URLRouter(routing.urlpatterns)),
-        ['http://localhost:8000', 'http://127.0.0.1:8000/', '.ngrok.io']
+        ['http://localhost:8080', 'http://127.0.0.1:8000/', '.ngrok.io']
     )
 })
