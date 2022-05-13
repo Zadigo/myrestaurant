@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'channels',
     'inventory',
     'pickups',
+    'favorites'
 ]
 
 MIDDLEWARE = [
