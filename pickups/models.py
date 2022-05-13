@@ -11,15 +11,6 @@ from pickups.managers import PickupManager
 from pickups.utils import calculate_vat
 
 
-# class PickupHistory(models.Model):
-#     """Tracks purchases at the current price they were
-#     bought. This avoids the impact of price
-#     modifications on items during the lifecycle 
-#     of the restaurant"""
-#     menu = models.ForeignKey(Menu, on_delete=models.SET_NULL)
-    
-
-
 class Pickup(models.Model):
     reference = models.UUIDField(default=uuid4, unique=True)
     date = models.DateTimeField(default=timezone.now)

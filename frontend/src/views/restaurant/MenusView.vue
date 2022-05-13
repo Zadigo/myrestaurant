@@ -35,11 +35,21 @@
         </div>
 
         <div class="col-12">
-          <div class="quick-menu w-100 d-flex justify-content-around p-4 mt-5 border-top border-bottom">
-            <button class="btn btn-md btn-primary btn-rounded" @click="goToSection()">Menu</button>
-            <button class="btn btn-md btn-primary btn-rounded">Le burger braisé</button>
-            <button class="btn btn-md btn-primary btn-rounded">Starters</button>
-            <button class="btn btn-md btn-primary btn-rounded">Desserts</button>
+          <div class="quick-menu w-100 border-top border-bottom py-4">
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <a href class="nav-link nav-link-rounded active" @click.prevent="goToSection">Menu</a>
+              </li>
+              <li class="nav-item">
+                <a href class="nav-link nav-link-rounded" @click.prevent="goToSection">Le burger braisé</a>
+              </li>
+              <li class="nav-item">
+                <a href class="nav-link nav-link-rounded" @click.prevent="goToSection">Starters</a>
+              </li>
+              <li class="nav-item">
+                <a href class="nav-link nav-link-rounded" @click.prevent="goToSection">Desserts</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -102,7 +112,7 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  cursor: pointer;
+.nav-pills .nav-link-rounded {
+  border-radius: 10rem;
 }
 </style>
