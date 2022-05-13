@@ -1,6 +1,5 @@
 var _ = require('lodash')
 
-
 function raiseError(functionName, message) {
     throw Error(`${functionName} - ${message}`)
 }
@@ -465,7 +464,7 @@ function getWebsocketProtocole() {
  */
 function websocketRootAddress(path) {
     var protocol = getWebsocketProtocole()
-    var host = process.env.HOST_ADDRESS || window.location.host
+    var host = process.env.HOST_ADDRESS || '127.0.0.1:8000'
     return new URL(path, protocol + host).toString()
 }
 
@@ -473,17 +472,19 @@ function websocketRootAddress(path) {
  * Create a new websocket instance
  * 
  * @param {String} path - path to use
- * @param {Object} options - eveent listeners onopen, onclose, onmessage and onerror
+ * @param {Object} listeners - onopen, onclose, onmessage and onerror
+ * @param {WebSocket} using - the websocket class to use
  * @returns {WebSocket} websocket instance
  * 
  */
-function createWebsocket(path, options = {}) {
+function createWebsocket(path, listeners = {}) {
+    console.log(websocketRootAddress(path))
     var socket = new WebSocket(websocketRootAddress(path))
-
-    socket.onopen = options['onopen']
-    socket.onclose = options['onclose']
-    socket.onmessage = options['onmessage']
-    socket.onerror = options['onerror']
+    
+    socket.onopen = listeners['onopen']
+    socket.onclose = listeners['onclose']
+    socket.onmessage = listeners['onmessage']
+    socket.onerror = listeners['onerror']
     
     return socket
 }
@@ -529,6 +530,53 @@ function hasNull(items) {
     })
 }
 
+/**
+ * Adds all the utils functions into Vue
+ * 
+ * @returns {Object} install object
+ * 
+ */
+function createUtils() {
+    return {
+        install: (app) => {
+            app.mixin({
+                methods: {
+                    buildLimitOffset,
+                    capitalizeFirstLetter,
+                    capitalizeLetters,
+                    conditionalTruncate,
+                    createWebsocket,
+                    decreaseIndex,
+                    formatAsPercentage,
+                    getVerticalScrollPercentage,
+                    getPreviousItemFromList,
+                    getNextItemFromList,
+                    getAutoComplete,
+                    getFieldType,
+                    hasNull,
+                    indexElements,
+                    increaseIndex,
+                    incrementLastId,
+                    listManager,
+                    loadView,
+                    loadLayout,
+                    loadComponent,
+                    mediaUrl,
+                    readFile,
+                    readMultipleFiles,
+                    rebuildPath,
+                    scrollToSection,
+                    searchHelper,
+                    scrollToTop,
+                    socketSendMessage,
+                    truncate,
+                    websocketRootAddress,
+                    quickSort
+                }
+            })
+        }
+    }
+}
 
 export {
     buildLimitOffset,
@@ -561,5 +609,7 @@ export {
     socketSendMessage,
     truncate,
     websocketRootAddress,
-    quickSort
+    quickSort,
+
+    createUtils
 }
