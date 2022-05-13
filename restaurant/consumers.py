@@ -37,7 +37,11 @@ class CustomerOrderConsumer(AsyncJsonWebsocketConsumer):
             await self.close()
         else:
             await self.accept()
-            await self.channel_layer.group_add('customer_orders', self.channel_name)
+            
+            if pickup.completed:
+                self.send_json({'method': 'already_completed'}, close=True)
+            else:
+                await self.channel_layer.group_add('customer_orders', self.channel_name)
     
     async def disconnect(self, code):
         await self.channel_layer.group_discard('customer_orders', self.channel_name)

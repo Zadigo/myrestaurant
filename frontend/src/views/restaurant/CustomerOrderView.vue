@@ -5,8 +5,9 @@
 </template>
 
 <script>
-// import ReconnectingWebsocket from 'reconnecting-websocket'
+import ReconnectingWebsocket from 'reconnecting-websocket'
 import { socketSendMessage } from '@/utils'
+
 export default {
   name: 'CustomerOrderView',
   data: () => ({
@@ -29,13 +30,13 @@ export default {
   },
   beforeMount() {
     var url = new URL(this.$route.params.reference, 'ws://127.0.0.1:8000/ws/customer-orders/')
-    // var socket = new ReconnectingWebsocket(url.toString(), [], {
-    //   maxReconnectionDelay: 200,
-    //   // minUptime: 1000
-    //   // connectionTimeout: 5000
-    //   maxRetries: 5
-    // })
-    var socket = new WebSocket(url.toString())
+    var socket = new ReconnectingWebsocket(url.toString(), [], {
+      maxReconnectionDelay: 200,
+      // minUptime: 1000
+      // connectionTimeout: 5000
+      maxRetries: 5
+    })
+    // var socket = new WebSocket(url.toString())
 
     socket.onopen = () => {
       socket.send(socketSendMessage('order.confirmed', {
@@ -61,7 +62,7 @@ export default {
         case 'waiting':
           break
 
-        case 'invalid_reference':
+        case 'already_completed':
           break
       
         default:
