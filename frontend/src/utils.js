@@ -1,21 +1,59 @@
 var _ = require('lodash')
-// import Vue from 'vue'
 
+
+function raiseError(functionName, message) {
+    throw Error(`${functionName} - ${message}`)
+}
+
+/**
+ * Adds an "id" attribute to each item
+ * in a list of items
+ * 
+ * @param {Array} items - list of items
+ * @returns {Array} indexed list of items
+ * @throws Error
+ * 
+ */
 function indexElements(items) {
     return _.map(items, (item, i) => {
-        item['id'] = i
-        return item
+        if (!(typeof item == 'object')) {
+            throw Error(`indexElements - ${item} should be a dictionnary`)
+        } else {
+            item['id'] = i
+            return item
+        }
+
     })
 }
 
+/**
+ * From a list of items, get the incremented
+ * last "id" attribute
+ * 
+ * @param items - list of items
+ * @returns {Number} item last id incremented by 1
+ * @throws Error
+ * 
+ */
 function incrementLastId(items) {
     var lastItem = _.last(items)
+
+    if (!(typeof lastItem === 'object')) {
+        throw Error(`incrementLastId - ${lastItem} should be a dictionnary`)
+    }
     return lastItem['id'] + 1
 }
 
+/**
+ * Read a user uploaded file
+ * 
+ * @param {File} file - a local file
+ * @returns {String | ArrayBuffer} data url of the file
+ *  
+ */
 function readFile(file) {
     var filePreview = null
-
+    
     if (file && file[0]) {
         let reader = new FileReader
 
@@ -28,31 +66,61 @@ function readFile(file) {
     return filePreview
 }
 
+/**
+ * Read multiple uploaded files
+ * 
+ * @param {Array} files - list of local files
+ * @returns {Array} data url of the file
+ *  
+ */
 function readMultipleFiles(files) {
-    return _.map(files, (file) => {
+    return files.map((file) => {
         return readFile(file)
     })
 }
 
-function truncate(value) {
-    return `${value.slice(0, 28)}...`
-}
-
-function conditionalTruncate(value, limit, k) {
-    if (value.length >= limit) {
-        return truncate(value, k)
+/**
+ * Truncate a given text by k-length
+ * 
+ * @param {String} text - text to truncate
+ * @param {Number} k - truncation value
+ * @returns {String} truncated string
+ *  
+ */
+function truncate(text, k=28) {
+    if (!(typeof text == 'string')) {
+        raiseError('truncate', `${text} should be a string`)
     } else {
-        return value
+        return `${text.slice(0, k)}...`
     }
 }
 
-function buildLimitOffset(url) {
-    // With an url like this http://example.com?limit=100&offset=10,
-    // try to rebuild query params with the provided limit
-    // and offset. If not default.
-    var limit = 100
-    var offset = 0
+/**
+ * Truncate a string based on it's length
+ * 
+ * @param {String} text - text to truncate
+ * @param {Number} limit - length under which the string should be truncated
+ * @param {Number} k - truncation value
+ * @returns {String} non-truncated or truncated string
+ *  
+ */
+function conditionalTruncate(text, limit, k) {
+    if (text.length >= limit) {
+        return truncate(text, k)
+    } else {
+        return text
+    }
+}
 
+/**
+ * From a given url, get the "limit" and "offset"
+ * query parameters
+ * 
+ * @param {String} url - url to parse
+ * @returns {String} limit and offset query parameters
+ *  
+ */
+function buildLimitOffset(url, limit=100, offset=0) {
     if (url) {
         var instance = new URL(url)
         var potentialLimit = instance.searchParams.get('limit')
@@ -61,11 +129,6 @@ function buildLimitOffset(url) {
         limit = potentialLimit ? potentialLimit : limit
         offset = potentialOffset ? potentialOffset : offset
     }
-
-    return new URLSearchParams({ limit: limit, offset: offset })
-}
-
-function limitAndOffsetAsParams(limit, offset) {
     return new URLSearchParams({ limit: limit, offset: offset })
 }
 
@@ -73,15 +136,12 @@ function limitAndOffsetAsParams(limit, offset) {
  * Manage the items of a list by adding or removing non-existing
  * elements accordingly
  * 
- * @params items - list of items
- * @params item - string or number
- * @returns Array
+ * @param {Array} items - list of items
+ * @param {String | Number} item - string or number
+ * @returns {Array} list of items
+ * 
  */
 function listManager(items, item) {
-    // A helper function that allows managing
-    // items in a list by removing or pushing
-    // them depending on whether they are in
-    // the list or not
     if (items.includes(item)) {
         var index = _.indexOf(items, item)
         items.splice(index, 1)
@@ -91,6 +151,16 @@ function listManager(items, item) {
     return items
 }
 
+/**
+ * Based on a list of values, increase an index
+ * by one if it's value is in the limits of the length
+ * of the list of items
+ * 
+ * @param {Array} items - list of items
+ * @param {Number} initialIndex - value to increment
+ * @returns {Number} updated index
+ * 
+ */
 function increaseIndex(items, initialIndex) {
     // Base on a list of items and an initial index,
     // increase the index by 1. If the new index is
@@ -104,6 +174,16 @@ function increaseIndex(items, initialIndex) {
     return newIndex
 }
 
+/**
+ * Based on a list of values, decrease an index
+ * by one if it's value is in the limits of the length
+ * of the list of items
+ * 
+ * @param {Array} items - list of items
+ * @param {Number} initialIndex - value to increment
+ * @returns {Number} updated index
+ * 
+ */
 function decreaseIndex(items, initialIndex) {
     // Base on a list of items and an initial index,
     // increase the index by 1. If the new index is
@@ -117,38 +197,55 @@ function decreaseIndex(items, initialIndex) {
     return newIndex
 }
 
-function getPreviousItemFromList(items, initialItem, field, callback) {
+/**
+ * Based on a list of values, increase an index
+ * by one if it's value is in the limits of the length
+ * of the list of items
+ * 
+ * @param {Array} items - list of dictionnaries
+ * @param {Object} initialItem - value to increment
+ * @param {String} field - value to increment
+ * @returns {Object} the dictionnary corresponding to the index
+ * 
+ */
+function getPreviousItemFromList(items, initialItem, field) {
     // Returns the previous item from a given list based on the position
     // of an initial element
     var index = _.findIndex(items, [field, initialItem[field]])
     var newIndex = decreaseIndex(items, index)
 
-    if (typeof callback === 'function') {
-        // callback.call(Vue, { newIndex: newIndex, item: items[newIndex] })
-        callback({ newIndex: newIndex, item: items[newIndex] })
-    }
-
     return items[newIndex]
 }
 
-function getNextItemFromList(items, initialItem, field, callback) {
-    // Returns the next item from a given list based on the position
-    // of an initial element
+/**
+ * Based on a list of values, decrease an index
+ * by one if it's value is in the limits of the length
+ * of the list of items
+ * 
+ * @param {Array} items - list of dictionnaries
+ * @param {Object} initialItem - value to increment
+ * @param {String} field - value to increment
+ * @returns {Object} the dictionnary corresponding to the index
+ * 
+ */
+function getNextItemFromList(items, initialItem, field) {
     var index = _.findIndex(items, [field, initialItem[field]])
     var newIndex = increaseIndex(items, index)
 
-    if (typeof callback === 'function') {
-        // callback.call(Vue, { newIndex: newIndex, item: items[newIndex] })
-        callback({ newIndex: newIndex, item: items[newIndex] })
-    }
-
     return items[newIndex]
 }
 
+/**
+ * Search a list of dictionnaries based on a given
+ * set of fields and return those that match
+ * 
+ * @param {String} search - value to search
+ * @param {Array} items - list of items
+ * @param {Array} fields - fields to search
+ * @returns {Array} list of matching items
+ * 
+ */
 function searchHelper(search, items, fields) {
-    // A quick helper function that allows us to
-    // quickly filter a list of dict items based on
-    // some given fields
     if (search) {
         return _.filter(items, (item) => {
             var truthArray = _.map(fields, (field) => {
@@ -177,15 +274,21 @@ function searchHelper(search, items, fields) {
     }
 }
 
+/**
+ * Based on the ID attribute of an element on the
+ * page, scroll to that element
+ * 
+ * @param {String} elementId - id of the element on the page
+ * 
+ */
 function scrollToSection(elementId) {
-    // Based on the ID attribute of an element on the
-    // page, scroll to that element
     document.getElementById(elementId).scrollIntoView()
 }
 
 /**
- * Scroll to the top section of the page
-*/
+ * Scroll to the top of a page
+ * 
+ */
 function scrollToTop() {
     window.scroll(0, 0)
 }
@@ -232,104 +335,197 @@ function getFieldType(fieldName, defaultType) {
     return fieldType
 }
 
+/**
+ * Loads a component under src/components
+ * 
+ * @param {String} component - component path
+ * 
+ */
 function loadView(component) {
     return () => import(`@/views/${component}.vue`)
 }
 
+/**
+ * Loads a component under src/layouts
+ * 
+ * @param {String} component - component path
+ * 
+ */
 function loadLayout(component) {
     return () => import(`@/layouts/${component}.vue`)
 }
 
-function loadComponent(name) {
-    return () => import(`@/components/${name}.vue`)
+/**
+ * Loads a component under src/views
+ * 
+ * @param {String} component - component path
+ * 
+ */
+function loadComponent(component) {
+    return () => import(`@/components/${component}.vue`)
 }
 
+/**
+ * Capitalize the first letter of a string
+ * 
+ * @param {String} value - text to capitalize
+ * @returns {String} capitalized text
+ * 
+ */
 function capitalizeFirstLetter(value) {
     if (!value) { return value }
     return value.charAt(0).toUpperCase() + value.slice(1)
 }
 
+/**
+ * Capitalize the first letters of a string
+ * see {@link capitalizeFirstLetter}
+ * 
+ * @param {String} value - text to capitalize
+ * @returns {String} capitalized text
+ * 
+ */
 function capitalizeLetters(value) {
-    // Capitalize each word in a phrase
-    const tokens = value.split(" ")
+    var tokens = value.split(" ")
+    var result = tokens.map((token) => {
+        return capitalizeFirstLetter(token)
+    })
 
-    for (var i = 0; i < tokens.length; i++) {
-        tokens[i] = tokens[i].charAt(0).toUpperCase() + tokens[i].slice(1)
-    }
-
-    return tokens.join(" ")
+    return result.join(" ")
 }
-
-function formatAsPercentage(value, negative) {
-    if (negative) {
-        return `-${value}%`
-    }
-    return `${value}%`
-}
-
 
 /**
- * Get the full url for a media path
+ * Capitalize the first letters of a string
+ * see {@link capitalizeFirstLetter}
  * 
- * @param path - relative path of the media element
- * @returns String
-*/
+ * @param {Number} value - value to format
+ * @param {Boolean} negative - return the percentage in a negative format
+ * @returns {String} formated text
+ * 
+ */
+function formatAsPercentage(value, negative = false) {
+    return negative ? `-${value}%` : `${value}%`
+}
+
+/**
+ * Get the full url for a media content
+ * 
+ * @param {String} path - relative path of the media element
+ * @returns {String} url
+ * 
+ */
 function mediaUrl(path) {
-    // Returns the full url from /media/image.jpg
-    // to http://.../media/image.jpg
-    // return new URL(path, process.env.rootURL)
-    return new URL(path, 'http://127.0.0.1:8000/media/').toString()
+    var rootUrl = process.env.rootUrl || 'http://127.0.0.1:8000'
+    return new URL('/media/' + path, rootUrl).toString()
 }
 
 /**
  * Get the percentage of the current
  * element that was scrolled
  * 
- * @param el - element on the page
- * @returns Number
-*/
+ * @param {Element} el - element on the page
+ * @returns {Number} - percentage scrolled
+ * 
+ */
 function getVerticalScrollPercentage(el) {
     var parent = el.parentNode
     return (el.scrollTop || parent.scrollTop) / (parent.scrollHeight - parent.clientHeight) * 100
 }
 
+/**
+ * Quickly sort a list of items
+ * 
+ * @param {Array} items - list of items
+ * @returns {Array} sorted list of a items
+ * 
+ */
 function quickSort(items) {
     return items.sort((a, b) => {
         return a - b
     })
 }
 
-function websocketProtocol() {
+/**
+ * Get the protocole for a websocket based
+ * on th protocole of the current address
+ * 
+ * @returns {String} ws:// or wss://
+ * 
+ */
+function getWebsocketProtocole() {
     var protocol = window.location.protocol
-    var socketProtocol = 'ws://'
-    if (protocol === 'https:') { socketProtocol = 'wss://' }
-    return socketProtocol
+    return protocol === 'https' ? 'wss://' : 'ws://'
 }
 
-function websocketRootAddress(host, path) {
-    var protocol = websocketProtocol()
-    if (!host) { host = window.location.host }
-    var base = new URL(path, protocol + host)
-    return base
-
+/**
+ * Get the full address for a websocket
+ * 
+ * @returns {String} url
+ * 
+ */
+function websocketRootAddress(path) {
+    var protocol = getWebsocketProtocole()
+    var host = process.env.HOST_ADDRESS || window.location.host
+    return new URL(path, protocol + host).toString()
 }
 
-function socketSendMessage(type, items) {
-    if (!items) { items = {} }
-    return JSON.stringify({
-        type: type,
-        ...items
-    })
+/**
+ * Create a new websocket instance
+ * 
+ * @param {String} path - path to use
+ * @param {Object} options - eveent listeners onopen, onclose, onmessage and onerror
+ * @returns {WebSocket} websocket instance
+ * 
+ */
+function createWebsocket(path, options = {}) {
+    var socket = new WebSocket(websocketRootAddress(path))
+
+    socket.onopen = options['onopen']
+    socket.onclose = options['onclose']
+    socket.onmessage = options['onmessage']
+    socket.onerror = options['onerror']
+    
+    return socket
 }
 
+/**
+ * Send a message to a websocket
+ * 
+ * @param {String} type - method for the websocket
+ * @param {Object} items - dictionnary of items to send
+ * @returns {String} url
+ * 
+ */
+function socketSendMessage(type, items = {}) {
+    return JSON.stringify({ type: type, ...items })
+}
+
+/**
+ * Resolve a relative path to a full url
+ * 
+ * @param {String} path - path to resolve
+ * @returns {String} url
+ * 
+ */
 function rebuildPath(path) {
     var instance = new URL(path, window.location.href)
     return instance.toString()
 }
 
-function hasNull(values) {
-    return _.some(values, (value) => {
-        return value == null || value == undefined || value == ""
+/**
+ * Check if a list of items has null values
+ * 
+ * @param {Array | Object} items - elements to evaluate
+ * @returns {Boolean} true or false
+ * 
+ */
+function hasNull(items) {
+    if (typeof items == 'object') {
+        items = Object.values(items)
+    }
+
+    return _.some(items, (item) => {
+        return item == null || item == undefined || item == ""
     })
 }
 
@@ -339,6 +535,7 @@ export {
     capitalizeFirstLetter,
     capitalizeLetters,
     conditionalTruncate,
+    createWebsocket,
     decreaseIndex,
     formatAsPercentage,
     getVerticalScrollPercentage,
@@ -351,7 +548,6 @@ export {
     increaseIndex,
     incrementLastId,
     listManager,
-    limitAndOffsetAsParams,
     loadView,
     loadLayout,
     loadComponent,
@@ -364,7 +560,6 @@ export {
     scrollToTop,
     socketSendMessage,
     truncate,
-    websocketProtocol,
     websocketRootAddress,
     quickSort
 }
