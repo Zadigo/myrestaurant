@@ -40,14 +40,14 @@ export default {
     }
   },
   created() {
-    if (this.store.availableMenus.length == 0) {
+    if (this.store.availableMenus.length === 0) {
       this.getMenus()
     }
   },
   methods: {
     async getMenus() {
       try {
-        var response = await this.axios.get('/inventory/menus')
+        const response = await this.axios.get('/inventory/menus')
         this.store.$patch((state) => {
           state.availableMenus = response.data
         })

@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-12">
           <div class="form-check">
-            <input v-model="deliveryOption.type" value="Click & collect" class="form-check-input" type="radio" name="delivery" id="delivery" checked>
+            <input id="delivery" v-model="deliveryOption.type" value="Click & collect" class="form-check-input" type="radio" name="delivery" checked>
             <label class="form-check-label" for="delivery">
               Click & collect
             </label>
@@ -23,7 +23,7 @@
           </div>
         </div>
 
-        <button class="btn btn-lg btn-block btn-primary shadow-none" @click="showDeliveryModal=false">
+        <button type="button" class="btn btn-lg btn-block btn-primary shadow-none" @click="showDeliveryModal=false">
           Confirmer
         </button>
       </div>
@@ -34,18 +34,21 @@
 <script>
 import { useRestaurant } from '@/store/restaurant'
 import { mapWritableState } from 'pinia'
-
+import { useGeolocation } from '@vueuse/core'
 import BaseModal from '@/layouts/BaseModal.vue'
 
 export default {
   name: 'DeliveryModal',
+  components: { BaseModal },
   setup() {
+    const { locatedAt } = useGeolocation()
     var store = useRestaurant()
     return {
+      locatedAt,
+      location,
       store
     }
   },
-  components: { BaseModal },
   data: () => ({
     coordinates: null,
     deliveryOption: {
@@ -55,25 +58,17 @@ export default {
   computed: {
     ...mapWritableState(useRestaurant, ['showDeliveryModal'])
   },
-  beforeMount() {
-    this.getLocation()
-    // this.$getLocation({
-    //   enableHighAccuracy: false,
-    //   timeout: 5000,
-    //   maximumAge: 0
-    // })
-    // .then(coordinates => {
-    //   this.coordinates = coordinates
-    // })
-  },
-  methods: {
-    async getLocation() {
-      try {
-        this.coordinates = await this.$getLocation()
-      } catch(error) {
-        console.log(error)
-      }
-    },
-  }
+  // beforeMount() {
+  //   this.getLocation()
+  // },
+  // methods: {
+  //   async getLocation() {
+  //     try {
+  //       this.coordinates = await this.$getLocation()
+  //     } catch(error) {
+  //       console.log(error)
+  //     }
+  //   },
+  // }
 }
 </script>

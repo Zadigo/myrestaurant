@@ -54,8 +54,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    var requiresFullPage = ['payment_view', 'customer_order_view']
-    var store = useRestaurant()
+    const requiresFullPage = ['payment_view', 'customer_order_view']
+    const store = useRestaurant()
     
     if (requiresFullPage.includes(to.name)) {
         store.getGenericSite()

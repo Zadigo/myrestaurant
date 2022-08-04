@@ -3,7 +3,7 @@
     <header>
       <base-navbar />
     </header>
-    
+
     <section class="d-flex justify-content-between">
       <div class="left">
         <!-- Sidebar -->
@@ -15,8 +15,8 @@
       <div class="right w-100 p-3">
         <!-- Content  -->
         <router-view v-slot="{ Component }">
-          <transition name="opacity-transition" mode="in-out">
-            <component :key="$route.name" :is="Component" />
+          <transition name="opacity" mode="out-in">
+            <component :is="Component" :key="$route.name" />
           </transition>
         </router-view>
       </div>
@@ -41,7 +41,7 @@ import WebsiteMenu from '@/components/restaurant/WebsiteMenu.vue'
 import FavoritesModal from '@/components/restaurant/FavoritesModal.vue'
 
 export default {
-  name: 'App',
+  name: 'BaseSite',
   components: {
     BaseFooter,
     BaseNavbar,

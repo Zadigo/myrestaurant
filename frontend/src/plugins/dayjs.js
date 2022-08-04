@@ -1,6 +1,6 @@
-var dayjs = require('dayjs')
-var duration = require('dayjs/plugin/duration')
-var localization = require('dayjs/locale/fr')
+const dayjs = require('dayjs')
+const duration = require('dayjs/plugin/duration')
+const localization = require('dayjs/locale/fr')
 
 dayjs.extend(duration)
 dayjs.locale(localization)

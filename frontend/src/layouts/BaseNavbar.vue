@@ -15,9 +15,9 @@
           Home
         </router-link>
         
-        <router-link :to="{ name: 'payment_view' }" class="nav-link">
+        <a href class="nav-link" @click.prevent="showPayment">
           Payment
-        </router-link>
+        </a>
 
         <a href class="nav-link" @click.prevent="store.showFavoritesModal=true">
           Favoris
@@ -40,6 +40,12 @@ export default {
     var store = useRestaurant()
     return {
       store
+    }
+  },
+  methods: {
+    showPayment () {
+      // this.store.getGenericSite()
+      this.$router.push({ name: 'payment_view' })
     }
   }
 }

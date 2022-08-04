@@ -11,16 +11,16 @@ import GenericSiteVue from '@/layouts/GenericSite.vue'
 
 export default {
   name: 'App',
-  setup() {
-    var store = useRestaurant()
-    var { currentSite } = storeToRefs(store)
-    return {
-      currentSite
-    }
-  },
   components: {
     BaseSiteVue,
     GenericSiteVue
+  },
+  setup() {
+    const store = useRestaurant()
+    const { currentSite } = storeToRefs(store)
+    return {
+      currentSite
+    }
   }
 }
 </script>

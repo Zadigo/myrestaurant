@@ -29,7 +29,7 @@ export default {
     }
   },
   beforeMount() {
-    var socket = createWebsocket(`/ws/customer-orders/${this.$route.params.reference}`, {
+    const socket = createWebsocket(`/ws/customer-orders/${this.$route.params.reference}`, {
       onopen: () => {
         socket.send(socketSendMessage('order.confirmed', {
           reference: this.$route.params.reference
@@ -40,7 +40,7 @@ export default {
       },
       onmessage: (e) => {
         console.info(e)
-        let { method } = e.data
+        const { method } = e.data
 
         switch (method) {
           case 'preparing':

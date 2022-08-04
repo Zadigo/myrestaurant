@@ -3,3 +3,18 @@
     background-color: #1266f1;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
 }
+
+.opacity-enter-active,
+.opacity-leave-active {
+    transition: all .3s ease;
+}
+
+.opacity-enter-from,
+.opacity-leave-to {
+    opacity: 0;
+}
+
+.opacity-enter-to,
+.opacity-leave-from {
+    opacity: 1;
+}

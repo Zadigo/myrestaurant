@@ -12,7 +12,7 @@ require('mdb-ui-kit/css/mdb.min.css')
 
 const pinia = createPinia()
 
-var currentSite = ref('base-site')
+const currentSite = ref('base-site')
 
 pinia.use(({ store }) => {
     store.$state.currentSite = currentSite

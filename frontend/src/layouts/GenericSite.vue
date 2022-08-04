@@ -2,8 +2,8 @@
   <section id="restaurant">
     <!-- Content  -->
     <router-view v-slot="{ Component }">
-      <transition name="opacity-transition" mode="in-out">
-        <component :key="$route.name" :is="Component" />
+      <transition name="opacity" mode="in-out">
+        <component :is="Component" :key="$route.name" />
       </transition>
     </router-view>
   </section>

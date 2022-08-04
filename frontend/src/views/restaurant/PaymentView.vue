@@ -1,16 +1,18 @@
 <template>
   <section id="payment" class="vh-100">
     <header>
-      <nav class="navbar navbar-expand-lg bg-transparent">
-        <div id="navbar-nav" class="collapse navbar-collapse">
-          <router-link :to="{ name: 'welcome_view' }" class="nav-link">
-            Home
-          </router-link>
+      <nav class="navbar navbar-expand-lg bg-transparent shadow-none">
+        <div class="container-fluid">
+          <div id="navbar-nav" class="collapse navbar-collapse">
+            <router-link :to="{ name: 'welcome_view' }" class="nav-link">
+              Home
+            </router-link>
+          </div>
         </div>
       </nav>
     </header>
 
-    <div class="container">
+    <div class="container m-5">
       <div class="row">
         <div class="col-8">
           <div class="row">

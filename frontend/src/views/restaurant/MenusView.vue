@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-4 position-relative">
           <img :src="require('@/assets/burger1.jpg')" alt="Menus illustration" class="img-fluid rounded-1 shadow">
-          <button class="btn btn-sm btn-danger position-absolute top-0 m-3 shadow-none" style="left:65%;">
+          <button type="button" class="btn btn-sm btn-danger position-absolute top-0 m-3 shadow-none" style="left:65%;">
             heart
           </button>
         </div>
@@ -16,11 +16,11 @@
           <p class="m-0 text-muted">25 - 45 min · Burgers · Halal</p>
 
           <div class="btn-group my-3 shadow-none">
-            <button class="btn btn-md btn-outline-info">
+            <button type="button" class="btn btn-md btn-outline-info">
               Information
             </button>
   
-            <button class="btn btn-md btn-outline-danger" @click="store.showDeliveryModal=true">
+            <button type="button" class="btn btn-md btn-outline-danger" @click="store.showDeliveryModal=true">
               Livraison
             </button>
           </div>
@@ -85,12 +85,6 @@ import DeliveryModal from '@/components/restaurant/DeliveryModal.vue'
 
 export default {
   name: 'MenusView',
-  setup() {
-    var store = useRestaurant()
-    return {
-      store
-    }
-  },
   components: {
     BaseBreadcrumbs,
     DetailsModal,
@@ -102,6 +96,12 @@ export default {
         errorComponent: BaseCardLoadingVue,
         timeout: 300
     })
+  },
+  setup() {
+    var store = useRestaurant()
+    return {
+      store
+    }
   },
   methods: {
     goToSection() {
