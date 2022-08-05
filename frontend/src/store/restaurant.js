@@ -9,7 +9,24 @@ const useRestaurant = defineStore('restaurant', {
         currentProductDetails: {},
         
         availableDrinks: [],
-        availableMenus: [],
+        // availableMenus: [],
+        availableMenus: [
+            {
+                name: 'Google',
+                description: 'Google',
+                price_post_tax: 15.4
+            },
+            {
+                name: 'Google',
+                description: 'Google',
+                price_post_tax: 15.4
+            },
+            {
+                name: 'Google',
+                description: 'Google',
+                price_post_tax: 15.4
+            }
+        ],
 
         currentOrder: {}
     }),

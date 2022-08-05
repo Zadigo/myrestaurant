@@ -60,11 +60,21 @@
     <section id="content" class="mt-5">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12">
+          <!-- <div class="col-12">
             <h2 class="fs-3 mb-3">Big Formule - Hamburgé, Fernandines, Breuvage et Dessert</h2>
-          </div>
+          </div> -->
           
           <async-list-menu-details />
+
+          <div class="col-4">
+            <div class="card shadow-sm">
+              <div class="card-body text-center">
+                <font-awesome-icon icon="fa-solid fa-cart-shopping" size="3x" />
+                <p class="text-muted py-3 fs-5 fw-light">Votre panier est vide</p>
+                <button type="button" class="btn btn-block btn-primary">Finaliser la commande</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -77,6 +87,7 @@
 
 <script>
 import { defineAsyncComponent } from 'vue'
+import { useScroll } from '@vueuse/core'
 import { useRestaurant } from '@/store/restaurant'
 import BaseBreadcrumbs from '@/layouts/BaseBreadcrumbs.vue'
 import DetailsModal from '@/components/restaurant/DetailsModal.vue'
@@ -98,9 +109,11 @@ export default {
     })
   },
   setup() {
-    var store = useRestaurant()
+    const store = useRestaurant()
+    const { y } = useScroll()
     return {
-      store
+      store,
+      scrorllY: y
     }
   },
   methods: {

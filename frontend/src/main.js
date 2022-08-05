@@ -5,6 +5,7 @@ import App from './App.vue'
 import i18n from './i18n'
 import client from './plugins/axios'
 import router from './router'
+import './plugins/fontawesome'
 // import VueGeolocation from 'vue-browser-geolocation'
 
 require('bootstrap/dist/css/bootstrap.min.css')
@@ -40,41 +41,40 @@ app.use(router)
 app.use(i18n)
 app.use(VueAxios, client)
 // app.use(VueGeolocation)
-app.use({
-    install: (app) => {
-        function getLocation() {
-            return new Promise((resolve, reject) => {
-                var locationAvailable = 'geolocation' in window.navigator
+// app.use({
+//     install: (app) => {
+//         function getLocation() {
+//             return new Promise((resolve, reject) => {
+//                 var locationAvailable = 'geolocation' in window.navigator
                 
-                if (locationAvailable) {
-                    window.navigator.geolocation.getCurrentPosition((position) => {
-                        resolve({
-                            latitute: position.coords.latitude,
-                            longitude: position.coords.longitude,
-                            altitude: position.coords.altitude,
-                            altitudeAccuracy: position.coords.altitudeAccuracy,
-                            accuracy: position.coords.accuracy
-                        })
-                    })
-                } else {
-                    reject('No position available')
-                }
-            })
-        }
+//                 if (locationAvailable) {
+//                     window.navigator.geolocation.getCurrentPosition((position) => {
+//                         resolve({
+//                             latitute: position.coords.latitude,
+//                             longitude: position.coords.longitude,
+//                             altitude: position.coords.altitude,
+//                             altitudeAccuracy: position.coords.altitudeAccuracy,
+//                             accuracy: position.coords.accuracy
+//                         })
+//                     })
+//                 } else {
+//                     reject('No position available')
+//                 }
+//             })
+//         }
 
-        app.config.globalProperties.$getLocation = getLocation
+//         app.config.globalProperties.$getLocation = getLocation
         
-        app.mixin({
-            methods: {
-                clearLocation() {
-                    // Do something
-                }
-            },
-
-            watch: {
+//         app.mixin({
+//             watch: {
                 
-            }
-        })
-    }
-})
+//             },
+//             methods: {
+//                 clearLocation() {
+//                     // Do something
+//                 }
+//             }
+//         })
+//     }
+// })
 app.mount('#app')
