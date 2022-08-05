@@ -20,7 +20,7 @@ const routes = [
       },
       {
         path: 'tab2',
-        component: () => import('@/views/Tab2Page.vue')
+        component: () => import('@/views/ProductsPage.vue')
       },
       {
         path: 'tab3',

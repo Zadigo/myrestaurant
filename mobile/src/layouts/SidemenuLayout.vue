@@ -1,5 +1,5 @@
 <template>
-  <ion-menu side="start" menu-id="first" content-id="main">
+  <ion-menu side="start" menu-id="firsts" content-id="main">
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title>Start Menu</ion-title>
@@ -30,9 +30,16 @@ import {
   IonToolbar,
   menuController
 } from '@ionic/vue'
+import { mail } from 'ionicons/icons'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
+  name: 'SidemenuLayout',
+  setup () {
+    return {
+      mail
+    }
+  },
   components: {
     IonContent,
     IonHeader,
