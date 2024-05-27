@@ -63,7 +63,7 @@
                     </label>
                   </div>
 
-                  <button class="btn btn-block btn-primary bn-lg" @click="doPayment">
+                  <button class="btn btn-block btn-rounded btn-primary btn-lg shadow-none" @click="doPayment">
                     Commander avec livraison
                   </button>
                 </div>

@@ -16,6 +16,7 @@ import colors from 'vuetify/util/colors'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
 import './style.css'
+import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'mdb-ui-kit/css/mdb.min.css'

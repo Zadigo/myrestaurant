@@ -1,9 +1,11 @@
 <template>
-  <base-site />
+  <v-app>
+    <base-site />
+  </v-app>
 </template>
 
 <script>
-import BaseSite from './layouts/BaseSite.vue'
+import BaseSite from 'src/layouts/BaseSite.vue'
 export default {
   name: 'App',
   components: {

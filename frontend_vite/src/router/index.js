@@ -12,32 +12,50 @@ const router = createRouter({
     {
       path: '/welcome',
       name: 'welcome_view',
-      component: async () => import('pages/restaurant/WelcomePage.vue')
+      component: async () => import('pages/restaurant/WelcomePage.vue'),
+      meta: {
+        requiresNavs: true
+      }
     },
     {
       path: '/restaurant/menus',
       name: 'menus_view',
-      component: async () => import('pages/restaurant/MenusPage.vue')
+      component: async () => import('pages/restaurant/MenusPage.vue'),
+      meta: {
+        requiresNavs: true
+      }
     },
     {
       path: '/restaurant/desserts',
       name: 'desserts_view',
-      component: async () => import('pages/restaurant/MenusPage.vue')
+      component: async () => import('pages/restaurant/MenusPage.vue'),
+      meta: {
+        requiresNavs: true
+      }
     },
     {
       path: '/faq',
       name: 'faq_view',
-      component: async () => import('pages/restaurant/MenusPage.vue')
+      component: async () => import('pages/restaurant/MenusPage.vue'),
+      meta: {
+        requiresNavs: true
+      }
     },
     {
       path: '/payment',
-      name: 'payment_view',
-      component: async () => import('pages/restaurant/PaymentPage.vue')
+      name: 'payment',
+      component: async () => import('pages/restaurant/PaymentPage.vue'),
+      meta: {
+        requiresNavs: false
+      }
     },
     {
       path: '/customer-order/:reference([a-zA-Z0-9-]+)',
       name: 'customer_order_view',
-      component: async () => import('pages/restaurant/CustomerOrderPage.vue')
+      component: async () => import('pages/restaurant/CustomerOrderPage.vue'),
+      meta: {
+        requiresNavs: false
+      }
     }
   ]
 })

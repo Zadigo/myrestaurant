@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div v-for="i in 20" :key="i" class="col-3">
+    <div v-for="i in 20" :key="i" class="col-6">
       <div class="card">
         <div class="card-body">
           Loading...

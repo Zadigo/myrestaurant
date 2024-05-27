@@ -10,6 +10,7 @@
         <div class="card shadow-sm">
           <router-link :to="{ name: link.name }">
             <img :alt="link.text" :src="'/burger3.jpg'" class="card-img-top">
+
             <div class="card-body">
               {{ link.text }}
             </div>
@@ -21,12 +22,14 @@
 </template>
 
 <script>
-import BaseBreadcrumbs from '@/layouts/BaseBreadcrumbs.vue'
-import welcomeLinks from '@/data/welcome.json'
+import BaseBreadcrumbs from 'src/layouts/BaseBreadcrumbs.vue'
+import welcomeLinks from 'src/data/welcome.json'
 
 export default {
-  name: 'WelcomeView',
-  components: { BaseBreadcrumbs },
+  name: 'WelcomePage',
+  components: {
+    BaseBreadcrumbs
+  },
   setup() {
     return {
       welcomeLinks

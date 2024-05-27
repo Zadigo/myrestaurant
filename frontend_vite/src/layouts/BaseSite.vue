@@ -1,11 +1,11 @@
 <template>
   <section id="restaurant">
-    <header>
+    <header v-if="$route.meta.requiresNavs">
       <base-navbar />
     </header>
 
     <section class="d-flex justify-content-between">
-      <div class="left">
+      <div v-if="$route.meta.requiresNavs" class="left">
         <!-- Sidebar -->
         <keep-alive>
           <base-sidebar />
@@ -27,7 +27,7 @@
     <favorites-modal />
 
     <!-- Footer -->
-    <base-footer />
+    <base-footer v-if="$route.meta.requiresNavs" />
   </section>
 </template>
 
