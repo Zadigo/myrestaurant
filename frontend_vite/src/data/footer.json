@@ -1,0 +1,28 @@
+[
+    {
+        "section": "Découvrir",
+        "links": [
+            {
+                "name": "menus_view",
+                "text": "About us"
+            },
+            {
+                "name": "menus_view",
+                "text": "Join us"
+            }
+        ]
+    },
+    {
+        "section": "Aide",
+        "links": [
+            {
+                "name": "menus_view",
+                "text": "Nous contacter"
+            },
+            {
+                "name": "menus_view",
+                "text": "FAQ"
+            }
+        ]
+    }
+]
