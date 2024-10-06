@@ -1,5 +1,5 @@
 <template>
-  <base-modal :show="showDeliveryModal" @close-modal="showDeliveryModal=false">
+  <base-modal :id="id" :show="showDeliveryModal" @close="showDeliveryModal=false">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
@@ -35,11 +35,17 @@
 import { useRestaurant } from '@/store/restaurant'
 import { mapWritableState } from 'pinia'
 import { useGeolocation } from '@vueuse/core'
+
 import BaseModal from '@/layouts/BaseModal.vue'
 
 export default {
   name: 'DeliveryModal',
   components: { BaseModal },
+  props: {
+    id: {
+      type: String
+    }
+  },
   setup() {
     const { locatedAt } = useGeolocation()
     var store = useRestaurant()

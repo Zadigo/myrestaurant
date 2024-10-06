@@ -20,7 +20,7 @@
               Information
             </button>
   
-            <button type="button" class="btn btn-md btn-outline-danger" @click="store.showDeliveryModal=true">
+            <button type="button" class="btn btn-md btn-outline-danger" @click="restaurantStore.showDeliveryModal=true">
               Livraison
             </button>
           </div>
@@ -64,27 +64,37 @@
             <h2 class="fs-3 mb-3">Big Formule - Hamburgé, Fernandines, Breuvage et Dessert</h2>
           </div> -->
           
-            <div id="menus" class="col-8">
-              <h4 class="fw-bold">Menus</h4>
+          <div id="menus" class="col-8">
+            <h4 class="fw-bold">Menus</h4>
 
-              <suspense>
-                <template #default>
-                  <async-list-menu-details />
-                </template>
+            <suspense>
+              <template #default>
+                <async-list-menu-details />
+              </template>
 
-                <template #fallback>
-                  <base-card-loading />
-                </template>
-              </suspense>
-            </div>
+              <template #fallback>
+                <base-card-loading />
+              </template>
+            </suspense>
+          </div>
 
 
           <div class="col-4">
             <div class="card shadow-sm">
               <div class="card-body text-center">
-                <font-awesome-icon icon="fa-solid fa-cart-shopping" size="3x" />
-                <p class="text-muted py-3 fs-5 fw-light">Votre panier est vide</p>
-                <router-link :to="{ name: 'payment' }" class="btn btn-block btn-primary btn-rounded shadow-none btn-lg">
+                <template v-if="cartStore.hasProducts">
+                  <div v-for="item in products" :key="item.id" class="card border shadow-none mb-1">
+                    <div class="card-body">
+                      {{ item.product.name }}
+                    </div>
+                  </div>
+                </template>
+                <p v-else class="text-muted py-3 fs-5 fw-light">
+                  <font-awesome-icon icon="fa-solid fa-cart-shopping" size="3x" />
+                  Votre panier est vide
+                </p>
+            
+                <router-link :to="{ name: 'payment' }" class="btn btn-block btn-primary btn-rounded shadow-none btn-lg mt-3">
                   Finaliser la commande
                 </router-link>
               </div>
@@ -95,8 +105,8 @@
     </section>
 
     <!-- Modals -->
-    <details-modal id="details-modal" v-model="store.showDetailsModal" @close="store.toggleModal" />
-    <delivery-modal id="delivery-modal" :show="store.showDeliveryModal" />
+    <details-modal id="details-modal" v-model="restaurantStore.showDetailsModal" />
+    <delivery-modal id="delivery-modal" :show="restaurantStore.showDeliveryModal" />
   </section>
 </template>
 
@@ -109,6 +119,8 @@ import BaseCardLoading from 'src/layouts/BaseCardLoading.vue'
 import BaseBreadcrumbs from 'src/layouts/BaseBreadcrumbs.vue'
 import DetailsModal from 'src/components/restaurant/DetailsModal.vue'
 import DeliveryModal from 'src/components/restaurant/DeliveryModal.vue'
+import { useCart } from '@/stores/cart'
+import { storeToRefs } from 'pinia'
 
 export default {
   name: 'MenusPage',
@@ -122,10 +134,14 @@ export default {
     })
   },
   setup() {
-    const store = useRestaurant()
+    const restaurantStore = useRestaurant()
+    const cartStore = useCart()
+    const { products } = storeToRefs(cartStore)
     const { y } = useScroll()
     return {
-      store,
+      products,
+      cartStore,
+      restaurantStore,
       scrorllY: y
     }
   },

@@ -1,5 +1,5 @@
 <template>
-  <base-modal :show="show" dialog-classes="modal-dialog-scrollable">
+  <base-modal :id="id" :show="show" dialog-classes="modal-dialog-scrollable" @close="$emit('close')">
     <template #modal-title>
       RECETTE LOCALE - Le Barnabé
     </template>
@@ -23,7 +23,7 @@
             <div class="col-12 my-1">
               <p class="fw-bold">Cuisson du boeuf</p>
               <div v-for="option in cookingOptions" :key="option" class="form-check">
-                <input v-model="selectedOptions.cooking" :value="option" class="form-check-input" type="radio" name="cooking" id="cooking">
+                <input id="cooking" v-model="selectedOptions.cooking" :value="option" class="form-check-input" type="radio" name="cooking">
                 <label class="form-check-label" for="cooking">
                   {{ option }}
                 </label>
@@ -33,7 +33,7 @@
             <div class="col-12 my-1">
               <p class="fw-bold m-0 mt-2 mb-1">On enlève quelque chose ?</p>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <input id="flexCheckChecked" class="form-check-input" type="checkbox" value="" checked>
                 <label class="form-check-label" for="flexCheckChecked">
                   Checked checkbox
                 </label>
@@ -43,7 +43,7 @@
             <div class="col-12 my-1">
               <p class="fw-bold m-0 mt-2 mb-1">On rajoute autre chose ?</p>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <input id="flexCheckChecked" class="form-check-input" type="checkbox" value="" checked>
                 <label class="form-check-label" for="flexCheckChecked">
                   Fourme d'Ambert
                 </label>
@@ -53,17 +53,17 @@
             <div class="col-12 my-1">
               <p class="fw-bold m-0 mt-2 mb-1">Votre Breuvage</p>
               <div v-for="drink in currentProductDetails.drinks" :key="drink.id" class="form-check">
-                <input v-model.number="selectedOptions.drink" :value="drink.id" class="form-check-input" type="radio" name="drinks" id="drinks">
+                <input id="drinks" v-model.number="selectedOptions.drink" :value="drink.id" class="form-check-input" type="radio" name="drinks">
                 <label class="form-check-label" for="drinks">
                   {{ drink.name }} - {{ drink.flavor }}
                 </label>
               </div>
             </div>
 
-             <div class="col-12 my-1">
+            <div class="col-12 my-1">
               <p class="fw-bold m-0 mt-2 mb-1">Votre dessert</p>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="dessert" id="dessert">
+                <input id="dessert" class="form-check-input" type="radio" name="dessert">
                 <label class="form-check-label" for="dessert">
                   Fondant
                 </label>
@@ -83,12 +83,27 @@
 <script>
 import { useRestaurant } from '@/store/restaurant'
 import { storeToRefs } from 'pinia'
-import {} from '@/utils'
 
 import BaseModal from '@/layouts/BaseModal'
 
 export default {
   name: 'DetailsModal',
+  components: {
+    BaseModal
+  },
+  props: {
+    id: {
+      type: String
+    },
+    show: {
+      type: Boolean
+    }
+  },
+  emits: {
+    close () {
+      return true
+    }
+  },
   setup() {
     var store = useRestaurant()
     var { currentProductDetails } = storeToRefs(store)
@@ -96,14 +111,6 @@ export default {
       store,
       currentProductDetails
     }
-  },
-  props: {
-    show: {
-      type: Boolean
-    }
-  },
-  components: {
-    BaseModal
   },
   data: () => ({
     selectedOptions: {

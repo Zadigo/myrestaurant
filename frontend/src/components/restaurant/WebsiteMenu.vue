@@ -1,5 +1,5 @@
 <template>
-  <base-offcanvas :show="showWebsiteMenu" @close-offcanvas="showWebsiteMenu=false">
+  <base-offcanvas :show="showWebsiteMenu" @close="showWebsiteMenu=false">
     <ul class="nav nav-pills nav-fill flex-column">
       <li class="nav-item">
         <router-link :to="{ name: 'welcome_view' }" class="nav-link">

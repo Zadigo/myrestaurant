@@ -9,22 +9,21 @@ const useRestaurant = defineStore('restaurant', {
         currentProductDetails: {},
         
         availableDrinks: [],
-        // availableMenus: [],
         availableMenus: [
             {
-                name: 'Google',
+                name: 'Braisé de poulet',
                 description: 'Google',
-                price_post_tax: 15.4
+                price_post_tax: 10.4
             },
             {
-                name: 'Google',
+                name: 'Poulet Gouffu',
                 description: 'Google',
-                price_post_tax: 15.4
+                price_post_tax: 25.4
             },
             {
-                name: 'Google',
+                name: 'Riz de pois rouge',
                 description: 'Google',
-                price_post_tax: 15.4
+                price_post_tax: 45.4
             }
         ],
 

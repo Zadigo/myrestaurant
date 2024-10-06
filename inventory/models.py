@@ -24,12 +24,26 @@ class AbstractInventory(models.Model):
         options={'quality': 80},
         help_text='Image should be higher or equal to 400x400px'
     )
-    price_pre_tax = models.DecimalField(max_digits=5, decimal_places=2, default=1)
-    price_post_tax = models.DecimalField(max_digits=5, decimal_places=2, default=1)
+    price_pre_tax = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=1
+    )
+    price_post_tax = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=1
+    )
     slug = models.SlugField()
-    highlight_as_new = models.BooleanField(default=False)
-    active = models.BooleanField(default=False)
-    created_on = models.DateField(auto_now_add=True)
+    highlight_as_new = models.BooleanField(
+        default=False
+    )
+    active = models.BooleanField(
+        default=False
+    )
+    created_on = models.DateField(
+        auto_now_add=True
+    )
 
     class Meta:
         abstract = True
@@ -50,16 +64,27 @@ class Product(AbstractInventory):
     
     class Meta:
         constraints = [
-            UniqueConstraint(fields=['name'], name='unique_product')
+            UniqueConstraint(
+                fields=['name'], 
+                name='unique_product'
+            )
         ]
         indexes = [
-            Index(fields=['name'])
+            Index(
+                fields=['name']
+            )
         ]
 
 
 class Drink(AbstractInventory):
-    flavor = models.CharField(max_length=100, blank=True, null=True)
-    is_hot_drink = models.BooleanField(default=False)
+    flavor = models.CharField(
+        max_length=100, 
+        blank=True, 
+        null=True
+    )
+    is_hot_drink = models.BooleanField(
+        default=False
+    )
 
     class Meta:
         constraints = [
@@ -79,14 +104,26 @@ class Drink(AbstractInventory):
 
 class Menu(AbstractInventory):
     """Menus created by the restaurant for the customer"""
-    todays_specials = models.BooleanField(default=False)
-    products = models.ManyToManyField(Product, help_text='Available food items for the given menu')
-    drinks = models.ManyToManyField(Drink, help_text='Available drinks for the given menu')
+
+    todays_specials = models.BooleanField(
+        default=False
+    )
+    products = models.ManyToManyField(
+        Product, 
+        help_text='Available food items for the given menu'
+    )
+    drinks = models.ManyToManyField(
+        Drink, 
+        help_text='Available drinks for the given menu'
+    )
     # requires_cooking_state = models.BooleanField(default=False, help_text='This specific to items in the menu e.g. meat that might require a cooking state')
 
     class Meta:
         constraints = [
-            UniqueConstraint(fields=['name'], name='unique_menu_name')
+            UniqueConstraint(
+                fields=['name'], 
+                name='unique_menu_name'
+            )
         ]
         indexes = [
             Index(fields=['name'])

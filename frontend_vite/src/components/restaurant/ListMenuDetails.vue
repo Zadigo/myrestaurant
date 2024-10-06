@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div v-for="item in store.availableMenus" :key="item" class="col-6 g-2">
+    <div v-for="item in restaurantStore.availableMenus" :key="item" class="col-6 g-2">
       <a href class="text-dark" @click.prevent="showProductDetails(item)">
         <div :aria-label="item.name" class="card shadow-sm hoverable">
           <div class="row g-0">
@@ -35,12 +35,12 @@ export default {
   name: 'ListMenuDetails',
   async setup() {
     var { truncate } = useUtilities()
-    var store = useRestaurant()
+    var restaurantStore = useRestaurant()
 
     async function getMenus() {
       try {
         const response = await client.get('/inventory/menus')
-        store.$patch((state) => {
+        restaurantStore.$patch((state) => {
           state.availableMenus = response.data
         })
       } catch(error) {
@@ -50,18 +50,18 @@ export default {
     await getMenus()
 
     return {
-      store,
+      restaurantStore,
       truncate
     }
   },
   created() {
-    if (this.store.availableMenus.length === 0) {
+    if (this.restaurantStore.availableMenus.length === 0) {
       this.getMenus()
     }
   },
   methods: {
     showProductDetails(item) {
-      this.store.$patch((state) => {
+      this.restaurantStore.$patch((state) => {
         state.currentProductDetails = item
         state.showDetailsModal = true
       })

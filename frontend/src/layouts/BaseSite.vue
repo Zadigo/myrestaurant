@@ -37,8 +37,8 @@
 import BaseFooter from '@/layouts/BaseFooter.vue'
 import BaseNavbar from '@/layouts/BaseNavbar.vue'
 import BaseSidebar from '@/layouts/BaseSidebar.vue'
-import WebsiteMenu from '@/components/restaurant/WebsiteMenu.vue'
 import FavoritesModal from '@/components/restaurant/FavoritesModal.vue'
+import WebsiteMenu from '@/components/restaurant/WebsiteMenu.vue'
 
 export default {
   name: 'BaseSite',

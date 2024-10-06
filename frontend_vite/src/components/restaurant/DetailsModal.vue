@@ -73,7 +73,7 @@
         </div>
 
         <v-text-field type="number" variant="outlined" />
-        <button type="button" class="btn btn-primary btn-rounded">
+        <button type="button" class="btn btn-primary btn-rounded" @click="handleAddToCart">
           Valider
         </button>
       </v-card-text>
@@ -82,15 +82,13 @@
 </template>
 
 <script>
+import { useCart } from '@/stores/cart';
 import { useRestaurant } from '@/stores/restaurant'
 import { storeToRefs } from 'pinia'
-
-// import BaseModal from '@/layouts/BaseModal'
 
 export default {
   name: 'DetailsModal',
   components: {
-    // BaseModal
   },
   props: {
     id: {
@@ -109,10 +107,15 @@ export default {
     }
   },
   setup() {
-    var store = useRestaurant()
-    var { currentProductDetails } = storeToRefs(store)
+    var restaurantStore = useRestaurant()
+    var { currentProductDetails } = storeToRefs(restaurantStore)
+
+    var cartStore = useCart()
+    var { products } = storeToRefs(cartStore)
+
     return {
-      store,
+      products,
+      restaurantStore,
       currentProductDetails
     }
   },
@@ -153,7 +156,13 @@ export default {
   //     // Get the drinks from the session or the localstorage
   //   }
   // },
-  // methods: {
+  methods: {
+    handleAddToCart () {
+      this.show = false
+      this.products.push({
+        product: this.currentProductDetails
+      })
+    }
   //   async getDrinks() {
   //     try {
   //       var response = await this.axios.get('/inventory/drinks')
@@ -164,6 +173,6 @@ export default {
   //       console.error(error)
   //     }
   //   }
-  // }
+  }
 }
 </script>

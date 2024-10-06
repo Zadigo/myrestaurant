@@ -1,5 +1,5 @@
 <template>
-  <section id="payment" class="vh-100">
+  <section id="payment" class="vh-100 my-5">
     <header>
       <nav class="navbar navbar-expand-lg bg-transparent shadow-none">
         <div class="container-fluid">

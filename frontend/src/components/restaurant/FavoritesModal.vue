@@ -1,5 +1,5 @@
 <template>
-  <base-offcanvas :show="showFavoritesModal" @close-offcanvas="showFavoritesModal=false">
+  <base-offcanvas :show="showFavoritesModal" @close="showFavoritesModal=false">
     <p class="fw-bold">10 favoris disponibles</p>
     <div class="card shadow-none">
       <img src="http://via.placeholder.com/800x300" alt="" class="img-card-top img-fluid">

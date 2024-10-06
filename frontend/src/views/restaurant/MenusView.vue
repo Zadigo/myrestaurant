@@ -80,8 +80,8 @@
     </section>
 
     <!-- Modals -->
-    <details-modal :show="store.showDetailsModal" @close-modal="store.toggleModal" />
-    <delivery-modal :show="store.showDeliveryModal" />
+    <details-modal :id="'details-modal'" :show="store.showDetailsModal" @close="store.toggleModal" />
+    <delivery-modal :id="'details-modal'" :show="store.showDeliveryModal" />
   </section>
 </template>
 
@@ -89,9 +89,10 @@
 import { defineAsyncComponent } from 'vue'
 import { useScroll } from '@vueuse/core'
 import { useRestaurant } from '@/store/restaurant'
+
+import BaseCardLoadingVue from '@/layouts/BaseCardLoading.vue'
 import BaseBreadcrumbs from '@/layouts/BaseBreadcrumbs.vue'
 import DetailsModal from '@/components/restaurant/DetailsModal.vue'
-import BaseCardLoadingVue from '@/layouts/BaseCardLoading.vue'
 import DeliveryModal from '@/components/restaurant/DeliveryModal.vue'
 
 export default {

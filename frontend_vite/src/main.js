@@ -32,6 +32,12 @@ pinia.use(({ store }) => {
 
   store.$router = toRaw(router)
   store.$session = toRaw(session)
+
+  store.$subscribe(({ storeId }) => {
+    if (storeId === 'cart') {
+      session.create('cart', store.$state.products)
+    }
+  })
 })
 const plugins = installPlugins()
 const vuetify = createVuetify({

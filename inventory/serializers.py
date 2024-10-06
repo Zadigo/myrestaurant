@@ -1,5 +1,5 @@
-from rest_framework.serializers import Serializer
 from rest_framework import fields
+from rest_framework.serializers import Serializer
 
 
 class AbstractInventorySerializer(Serializer):
