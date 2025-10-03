@@ -1,9 +1,0 @@
-
-# GET http://127.0.0.1:8000/api/v1/inventory/menus HTTP/1.1 
-# Content-Type: application/json
-
-# GET http://127.0.0.1:8000/api/v1/inventory/drinks HTTP/1.1 
-# Content-Type: application/json
-
-# GET http://127.0.0.1:8000/api/v1/inventory/products HTTP/1.1 
-# Content-Type: application/json
