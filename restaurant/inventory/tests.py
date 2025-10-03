@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-class TestInventory(TestCase):
+class TestInventoryApi(TestCase):
     fixtures = ['items']
     
     def test_available_menus(self):

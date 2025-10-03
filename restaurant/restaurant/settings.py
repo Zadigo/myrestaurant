@@ -36,7 +36,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'rest_framework',
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
     'corsheaders',
     'django_celery_beat',
     'drf_spectacular',

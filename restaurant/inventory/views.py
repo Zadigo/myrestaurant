@@ -1,11 +1,10 @@
 from django.shortcuts import render
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-
 from inventory.models import Drink, Menu, Product
 from inventory.serializers import (DrinkSerializer, MenuSerializer,
                                    ProductSerializer)
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 
 @api_view(['get'])
