@@ -1,25 +1,28 @@
 <template>
-  <section id="welcome">
+  <section id="welcome" class="space-y-4">
     <!-- <base-breadcrumbs current-page="Welcome" /> -->
 
-    <h1 class="text-uppercase fw-bold">Notre carte</h1>
-    <p class="fw-light">Aucune excuse, faites-vous plaisir : il y en a pour tous les goûts !</p>
-    
-    <div class="row mt-5">
-      <div v-for="link in welcomeLinks" :key="link.name" class="col-3 my-1">
-        <div class="card shadow-sm">
-          <router-link :to="{ name: link.name }">
-            <img :alt="link.text" :src="require('@/assets/burger3.jpg')" class="card-img-top">
-            <div class="card-body">
-              {{ link.text }}
-            </div>
-          </router-link>
-        </div>
-      </div>
+    <nuxt-card>
+      <h1 class="text-uppercase font-bold text-4xl">Notre carte</h1>
+      <p class="font-light">Aucune excuse, faites-vous plaisir : il y en a pour tous les goûts !</p>
+    </nuxt-card>
+
+    <div class="grid grid-cols-3">
+      <nuxt-card v-for="link in welcomeLinks" :key="link.to">
+        <nuxt-link :to="link.to">
+          <img :alt="link.text" src="/burger1.jpg">
+          <p class="font-medium">{{ link.text }}</p>
+        </nuxt-link>
+      </nuxt-card>
     </div>
   </section>
 </template>
 
 <script lang="ts" setup>
-import { welcomeLinks } from '~/data'
+const welcomeLinks = [
+  {
+    "text": "Menus",
+    "to": "/restaurant/menus"
+  }
+]
 </script>

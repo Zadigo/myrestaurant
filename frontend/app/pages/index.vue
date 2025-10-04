@@ -1,6 +1,6 @@
 <template>
   <section id="novelties">
-    <h1 class="text-uppercase fw-bold">Nos nouveautés</h1>
+    <h1 class="text-uppercase fw-bold">Home</h1>
     <p class="fw-light">Découvrez nos derniers plats ajoutés au menu !</p>
   </section>
 </template>

@@ -1,29 +1,36 @@
 <template>
   <section id="restaurant">
-    <header>
+    <!-- <header>
       <base-navbar />
-    </header>
+    </header> -->
 
-    <section class="d-flex justify-content-between">
-      <div class="left">
-        <!-- Sidebar -->
-        <keep-alive>
-          <base-sidebar />
-        </keep-alive>
+    <div class="grid grid-cols-12 gap-2">
+      <div class="col-span-2 relative overflow-hidden">
+        <base-sidebar />
       </div>
 
-      <div class="right w-100 p-3">
+      <div class="col-span-10 p-3">
         <slot />
       </div>
-    </section>
+    </div>
 
     <!-- Modals -->
-    <website-menu />
-    <favorites-modal />
+    <!-- <website-menu />
+    <favorites-modal /> -->
 
     <!-- Footer -->
-    <keep-alive>
+    <!-- <keep-alive>
       <base-footer />
-    </keep-alive>
+    </keep-alive> -->
   </section>
 </template>
+
+<script lang="ts" setup>
+onMounted(() => {
+  document.body.classList.add('bg-slate-100')
+})
+
+onUnmounted(() => {
+  document.body.classList.remove('bg-slate-100')
+})
+</script>

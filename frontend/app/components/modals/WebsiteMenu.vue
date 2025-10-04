@@ -22,17 +22,3 @@
     </ul>
   </base-offcanvas>
 </template>
-
-<!-- <script>
-import { useRestaurant } from "@/store/restaurant"
-import BaseOffcanvas from '@/layouts/BaseOffcanvas.vue'
-import { mapWritableState } from "pinia"
-
-export default {
-  components: { BaseOffcanvas },
-  name: 'WebsiteMenu',
-  computed: {
-    ...mapWritableState(useRestaurant, ['showWebsiteMenu'])
-  }
-}
-</script> -->

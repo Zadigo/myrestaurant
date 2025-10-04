@@ -11,17 +11,3 @@
     </div>
   </base-offcanvas>
 </template>
-
-<script>
-import { useRestaurant } from "@/store/restaurant"
-import { mapWritableState } from "pinia"
-import BaseOffcanvas from '@/layouts/BaseOffcanvas.vue'
-
-export default {
-  components: { BaseOffcanvas },
-  name: 'FavoritesModal',
-  computed: {
-    ...mapWritableState(useRestaurant, ['showFavoritesModal'])
-  }
-}
-</script>

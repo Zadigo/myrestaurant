@@ -15,6 +15,9 @@ export default defineNuxtConfig({
         maxAge: 1
       }
     },
+    'restaurant/**': { 
+      ssr: false 
+    }
   },
 
   site: {
@@ -24,6 +27,12 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwind()]
   },
+
+  ui: {
+    prefix: 'nuxt',
+  },
+
+  css: ['~/assets/css/tailwind.css'],
 
   modules: [
     '@nuxt/eslint',
