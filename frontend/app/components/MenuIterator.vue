@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="font-bold text-2xl mb-2">Menu</div>
+    <div class="font-bold text-2xl mb-2">
+      Menu
+    </div>
+
     <div class="grid grid-cols-6 gap-2">
       <slot name="items" :items="availableMenus">
         <article v-for="item in availableMenus" :key="item.id">
@@ -8,7 +11,7 @@
             <a href="#" @click.prevent="emit('select', item)">
               <nuxt-card :aria-label="item.name" class="shadow-sm my-1">
                 <img src="/burger1.jpg" :alt="item.name" class="rounded-lg">
-                
+
                 <div>
                   <h5 class="font-bold text-2xl mt-5">{{ item.name }}</h5>
                   <p class="mb-1">{{ item.description }}</p>
@@ -22,7 +25,7 @@
             </a>
           </slot>
         </article>
-       </slot> 
+      </slot>
     </div>
   </div>
 </template>

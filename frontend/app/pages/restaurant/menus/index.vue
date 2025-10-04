@@ -37,7 +37,7 @@
           </div>
         </div>
 
-        <div class="col-span-12 py-2 mb-10">
+        <div class="col-span-8 py-2 mb-10">
           <nuxt-tabs v-model="currentSelection" :items="items" variant="link" color="neutral">
             <template #menus>
               <menu-iterator class="my-10" @select="selectMenu" />
@@ -55,6 +55,17 @@
               <button @click="() => {}">Desserts</button>
             </template>
           </nuxt-tabs>
+        </div>
+
+        <div class="col-span-4 py-2 mb-10">
+          <nuxt-card>
+            <template #header>
+              <h3 class="font-bold">Votre panier</h3>
+              <p class="text-muted">1 article · 15,90 €</p>
+            </template>
+
+            {{ cart }}
+          </nuxt-card>
         </div>
       </div>
     </div>
@@ -101,7 +112,7 @@ const items = ref<TabsItem[]>([
 
 const currentSelection = ref<string>('0')
 
-const showDeliveryModal = ref(false)
+const showDeliveryModal = ref<boolean>(false)
 
 function useSelectMenu() {
   const [showDetailsModal, toggleModal] = useToggle(false)
@@ -110,15 +121,28 @@ function useSelectMenu() {
   function selectMenu(item: RestaurantMenu) {
     selectedMenu.value = item
     toggleModal()
-  } 
+  }
+
+  const isSelected = computed(() => selectedMenu.value !== null)
 
   return {
     selectedMenu,
     showDetailsModal,
+    isSelected,
     toggleModal,
     selectMenu
   }
 }
 
-const { selectedMenu, selectMenu, showDetailsModal } = useSelectMenu()
+const { selectedMenu, selectMenu, showDetailsModal, isSelected } = useSelectMenu()
+const { cart, newCartItem } = useCart()
+
+watchTriggerable(isSelected, (newValue) => {
+  if (newValue && selectedMenu.value) {
+    newCartItem.menu_id = selectedMenu.value.id
+    console.log('newCartItem', newCartItem)
+  }
+})
+
+console.log('cart', useState('cart').value)
 </script>

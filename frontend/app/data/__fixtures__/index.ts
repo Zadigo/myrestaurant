@@ -44,31 +44,6 @@ export const availableMenus = ref<RestaurantMenu[]>([
             disabled: false
           },
           {
-            name: 'Coca-Cola',
-            price_post_tax: 2.5,
-            disabled: false
-          },
-          {
-            name: 'Fanta',
-            price_post_tax: 2.5,
-            disabled: false
-          },
-          {
-            name: 'Coca-Cola',
-            price_post_tax: 2.5,
-            disabled: false
-          },
-          {
-            name: 'Fanta',
-            price_post_tax: 2.5,
-            disabled: false
-          },
-          {
-            name: 'Coca-Cola',
-            price_post_tax: 2.5,
-            disabled: false
-          },
-          {
             name: 'Fanta',
             price_post_tax: 2.5,
             disabled: false

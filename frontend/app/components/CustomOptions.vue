@@ -7,7 +7,7 @@
       </div>
 
       <!-- Categories -->
-      <custom-option v-if="isSelected" :categories="customOption.categories" />
+      <custom-option-categories v-if="isSelected" :categories="customOption.categories" />
     </div>
   </div>
 </template>
