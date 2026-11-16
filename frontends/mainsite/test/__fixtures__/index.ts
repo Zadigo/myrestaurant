@@ -1,6 +1,6 @@
-import type { RestaurantMenu } from '~/types'
+import { RestaurantMenu } from '#shared/types/restaurant_menu'
 
-export const availableMenus = ref<RestaurantMenu[]>([
+export const availableMenus: RestaurantMenu[] = [
   {
     id: 1,
     name: 'Big Formule',
@@ -104,4 +104,4 @@ export const availableMenus = ref<RestaurantMenu[]>([
       ]
     }
   }
-])
+]

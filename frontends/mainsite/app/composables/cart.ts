@@ -1,5 +1,3 @@
-import type { Cart, CartItem } from '~/types';
-
 /**
  * Composable for managing the shopping cart
  */

@@ -7,9 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-import { meatDoneness } from '~/data/constants';
-import type { MeatDoneness, RestaurantMenu } from '~/types'
-
 defineProps<{ restaurantMenu: RestaurantMenu }>()
 
 const { newCartItem } = useCart<MeatDoneness>()

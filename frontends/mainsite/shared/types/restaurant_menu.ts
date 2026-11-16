@@ -1,5 +1,3 @@
-import type { _DatabaseItem, MeatCategory } from '.'
-
 export interface RestaurantMenuCustomOptionCategory {
   /**
    * The name of this option category

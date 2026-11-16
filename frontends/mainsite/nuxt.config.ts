@@ -21,7 +21,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: process.env.NUXT_PUBLIC_DJANGO_PROD_URL || 'http://localhost:3000'
+    url: process.env.NUXT_PUBLIC_DJANGO_PROD_URL
   },
 
   vite: {
@@ -41,7 +41,8 @@ export default defineNuxtConfig({
     '@nuxt/test-utils',
     '@nuxt/ui',
     '@vueuse/nuxt',
-    'nuxt-vuefire'
+    'nuxt-vuefire',
+    '@nuxtjs/seo'
   ],
 
   vuefire: {
@@ -67,5 +68,11 @@ export default defineNuxtConfig({
         password: process.env.NUXT_PUBLIC_REDIS_PASSWORD || ''
       }
     }
+  },
+
+  imports: {
+    dirs: [
+      '~/constants'
+    ]
   }
 })
