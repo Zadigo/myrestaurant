@@ -1,0 +1,6 @@
+{
+    "name": "@myrestaurant/projects",
+    "scripts": {
+        "dev:mainsite": "pnpm --filter mainsite run dev"
+    }
+}
