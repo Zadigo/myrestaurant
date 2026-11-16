@@ -21,7 +21,7 @@ func (a *App) GetRegistry() *utils.WsClients {
 }
 
 func (a *App) Start(ctx context.Context) {
-	server := http.Server{
+	server := &http.Server{
 		Addr:    ":9000",
 		Handler: a.router,
 	}

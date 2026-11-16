@@ -12,6 +12,10 @@ type BaseWsClient struct {
 	conn *websocket.Conn
 }
 
+func (c *BaseWsClient) GetConn() *websocket.Conn {
+	return c.conn
+}
+
 func (c *BaseWsClient) SendJsonMessage(message WebsocketMessage) error {
 	return c.conn.WriteJSON(message)
 }

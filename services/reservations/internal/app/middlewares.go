@@ -10,6 +10,12 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+const (
+	writeWait  = 10 * time.Second
+	pongWait   = 60 * time.Second
+	pingPeriod = (pongWait * 9) / 10 // Must be less than pongWait (e.g., 54s)
+)
+
 func Cors(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -49,7 +55,9 @@ var CustomRequestUpgrader = websocket.Upgrader{
 	},
 }
 
-func WsMiddleware(conn *websocket.Conn) {
+func WsMiddleware(client *utils.BaseWsClient, clients *utils.WsClients) (tickerCancel func()) {
+	conn := client.GetConn()
+
 	conn.SetReadLimit(1024)
 	conn.SetReadDeadline(time.Now().Add(60 * time.Second))
 
@@ -57,6 +65,25 @@ func WsMiddleware(conn *websocket.Conn) {
 		conn.SetReadDeadline(time.Now().Add(60 * time.Second))
 		return nil
 	})
+
+	ticker := time.NewTicker(pingPeriod)
+	// defer ticker.Stop()
+
+	go func() {
+		for range ticker.C {
+			deadline := time.Now().Add(writeWait)
+			if err := conn.WriteControl(websocket.PingMessage, []byte{}, deadline); err != nil {
+				// Ping failed; closing the connection will unblock ReadMessage() below
+				conn.Close()
+				clients.Remove(client)
+				return
+			}
+		}
+	}()
+
+	return func() {
+		ticker.Stop()
+	}
 }
 
 // Authorization middleware to check for valid authorization header

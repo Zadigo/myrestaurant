@@ -12,4 +12,10 @@
  */
 
 useState<Cart>('cart', () => ({ items: [] }))
+
+/**
+ * Websocket
+ */
+
+useWsComposable()
 </script>
