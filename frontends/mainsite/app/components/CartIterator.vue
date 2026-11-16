@@ -10,7 +10,7 @@
 
     <template #footer>
       <div>
-        <u-button class="w-full" :disabled="cart.items.length === 0">
+        <u-button to="/restaurant/payment" class="w-full" :disabled="cart.items.length === 0">
           Passer la commande
         </u-button>
       </div>

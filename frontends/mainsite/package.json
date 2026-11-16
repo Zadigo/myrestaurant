@@ -37,6 +37,7 @@
     "vuefire": "^3.2.3"
   },
   "devDependencies": {
+    "@iconify-json/lucide": "^1.2.155",
     "oxfmt": "^0.78.0",
     "oxlint": "^1.93.0",
     "oxlint-tsgolint": "^7.0.2007"

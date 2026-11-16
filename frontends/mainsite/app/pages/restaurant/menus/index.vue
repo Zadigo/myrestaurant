@@ -106,27 +106,9 @@ const currentSelection = ref<string>('0')
 
 const showDeliveryModal = ref<boolean>(false)
 
-function useSelectMenu() {
-  const [showDetailsModal, toggleModal] = useToggle(false)
-  const selectedMenu = ref<Nullable<RestaurantMenu>>(null)
 
-  function selectMenu(item: RestaurantMenu) {
-    selectedMenu.value = item
-    toggleModal()
-  }
 
-  const isSelected = computed(() => selectedMenu.value !== null)
-
-  return {
-    selectedMenu,
-    showDetailsModal,
-    isSelected,
-    toggleModal,
-    selectMenu
-  }
-}
-
-const { selectedMenu, selectMenu, showDetailsModal, isSelected } = useSelectMenu()
+const { selectedMenu, selectMenu, showDetailsModal, isSelected } = useSelectMenuComposable()
 const { cart, newCartItem } = useCart()
 
 watchTriggerable(isSelected, (newValue) => {

@@ -1,131 +1,124 @@
 <template>
   <section id="payment" class="vh-100">
     <header>
-      <nav class="navbar navbar-expand-lg bg-transparent shadow-none">
-        <div class="container-fluid">
-          <div id="navbar-nav" class="collapse navbar-collapse">
-            <router-link :to="{ name: 'welcome_view' }" class="nav-link">
-              Home
-            </router-link>
-          </div>
-        </div>
+      <nav class="bg-transparent px-10">
+        <nuxt-link to="/" class="nav-link">
+          Home
+        </nuxt-link>
       </nav>
     </header>
 
-    <div class="container m-5">
-      <div class="row">
-        <div class="col-8">
-          <div class="row">
-            <div class="col-12">
-              <h1>Falafel's 💚 - Lille</h1>
-              <p class="text-muted">Livrée dans 20 - 40 min</p>
-            </div>
+    <u-container class="my-10">
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-8">
+          <div class="py-3 rounded-lg">
+            <h1>Falafel's 💚 - Lille</h1>
+            <p class="text-slate-500">Livrée dans 20 - 40 min</p>
+          </div>
 
-            <div class="col-12">
-              <div class="card">
-                <div class="card-body">
-                  <div class="border rounded-sm">
-                    <div class="p-3">
-                      <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Je veux des couverts</label>
-                      </div>
-                      <p class="font-weight-bold">Couverts</p>
+          <div>
+            <u-card>
+              <form @submit.prevent>
+                <div class="border rounded-lg border-slate-300">
+                  <div class="p-3">
+                    <u-checkbox label="Je veux des couverts" />
+
+                    <div class="mt-5">
+                      <p class="font-bold">Couverts</p>
                       <p>Aidez-nous à réduire les déchets : ne demandez des couverts que si vous en avez besoin.</p>
                     </div>
                   </div>
-
-                  <!-- TODO: Make this reusable -->
-                  <div class="d-flex justify-content-between mt-3 mb-1">
-                    <div class="fw-bold">Adresse de livraison</div>
-                    <div class="text-muted">Modifier</div>
-                  </div>
-
-                  <div class="border rounded-sm p-3">
-                    1 Rue de Paris, Paris 75001
-                    +33 6 00 00 00 00
-                  </div>
-
-                  <div class="d-flex justify-content-between mt-3 mb-1">
-                    <div class="fw-bold">Instructions de livraison</div>
-                    <div class="text-muted">Modifier</div>
-                  </div>
-
-                  <div class="d-flex justify-content-between mt-3 mb-1">
-                    <div class="fw-bold">Mode paiement</div>
-                    <div class="text-muted">Modifier</div>
-                  </div>
-
-                  <div class="form-check my-4">
-                    <input v-model="consent" class="form-check-input" type="checkbox" name="consent" id="consent">
-                    <label class="form-check-label" for="consent">
-                      J'ai lu et j'accepte les nouvelles conditions générales.
-                    </label>
-                  </div>
-
-                  <button class="btn btn-block btn-primary bn-lg" @click="doPayment">
-                    Commander avec livraison
-                  </button>
                 </div>
-              </div>
-            </div>
+  
+                <!-- TODO: Make this reusable -->
+                <div class="flex justify-between mt-3 mb-1">
+                  <div class="font-bold">Adresse de livraison</div>
+                  <u-button icon="lucide:pen" variant="soft">Modifier</u-button>
+                </div>
+  
+                <div class="border rounded-lg border-slate-300 p-3">
+                  1 Rue de Paris, Paris 75001
+                  +33 6 00 00 00 00
+                </div>
+  
+                <div class="flex justify-between mt-3 mb-1">
+                  <div class="font-bold">Instructions de livraison</div>
+                  <u-button icon="lucide:pen" variant="soft">Modifier</u-button>
+                </div>
+  
+                <div class="flex justify-between mt-3 mb-1">
+                  <div class="font-bold">Mode paiement</div>
+                  <u-button icon="lucide:pen" variant="soft">Modifier</u-button>
+                </div>
+  
+                <u-checkbox label="J'ai lu et j'accepte les nouvelles conditions générales." />
+              </form>
+
+              <template #footer>
+                <div class="flex justify-end">
+                  <u-button icon="lucide:credit-card" @click="doPayment">
+                    Commander avec livraison
+                  </u-button>
+                </div>
+              </template>
+            </u-card>
           </div>
         </div>
         
-        <div class="col-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="font-weight-bold">Panier</div>
+        <aside class="col-span-4">
+          <u-card>
+            <template #title>
+              Panier
+            </template>
 
-              <div class="row">
-                <div class="col1">1x</div>
-                <div class="col-8">
-                  <p>Menu sandwich + frites 🌯🍟</p>
-                  <p class="text-muted">Dwich Falafel 🧆</p>
-                </div>
-                <div class="col-2">
-                  12€
-                </div>
+            <div class="grid grid-cols-12 gap-1">
+              <div class="col-span-2">1x</div>
+              <div class="col-span-8">
+                <p>Menu sandwich + frites 🌯🍟</p>
+                <p class="text-muted">Dwich Falafel 🧆</p>
               </div>
-
-              <hr class="my-3">
-
-              <div class="row">
-                <div class="d-flex justify-content-between">
-                  <span>Sous-total</span>
-                  <span>12€</span>
-                </div>
-                
-                <div class="d-flex justify-content-between">
-                  <span>Frais de livraison</span>
-                  <span>Offert</span>
-                </div>
-
-                <div class="d-flex justify-content-between">
-                  <span>Frais de service</span>
-                  <span>0.96€</span>
-                </div>
-
-                <div class="d-flex justify-content-between">
-                  <span>Pourboir livreur livreuse</span>
-                  <span>0€</span>
-                </div>
-
-                <hr class="my-3">
-
-                <div class="d-flex justify-content-between">
-                  <span class="fw-bold">Total</span>
-                  <span>12€</span>
-                </div>
+              <div class="col-span-2">
+                12€
               </div>
             </div>
-          </div>
-        </div>
+
+            <u-separator class="my-3" />
+
+            <div class="space-y-2">
+              <div class="flex justify-between">
+                <span class="font-semibold">Sous-total</span>
+                <span>12€</span>
+              </div>
+              
+              <div class="flex justify-between">
+                <span class="font-semibold">Frais de livraison</span>
+                <span>Offert</span>
+              </div>
+
+              <div class="flex justify-between">
+                <span class="font-semibold">Frais de service</span>
+                <span>0.96€</span>
+              </div>
+
+              <div class="flex justify-between">
+                <span class="font-semibold">Pourboir livreur livreuse</span>
+                <span>0€</span>
+              </div>
+
+              <u-separator class="my-3" />
+
+              <div class="flex justify-between">
+                <span class="font-semibold">Total</span>
+                <span class="font-bold">12€</span>
+              </div>
+            </div>
+          </u-card>
+        </aside>
       </div>
-    </div>
+    </u-container>
   </section>
 </template>
 
 <script lang="ts" setup>
-
+const { doPayment } = usePaymentComposable()
 </script>
