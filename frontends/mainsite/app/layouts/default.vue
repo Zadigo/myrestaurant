@@ -27,10 +27,10 @@
 
 <script lang="ts" setup>
 onMounted(() => {
-  document.body.classList.add('bg-brand-50', 'dark:bg-brand-800' )
+  document.body.classList.add('bg-red-50', 'dark:bg-red-800' )
 })
 
 onUnmounted(() => {
-  document.body.classList.remove('bg-brand-50', 'dark:bg-brand-800' )
+  document.body.classList.remove('bg-red-50', 'dark:bg-red-800' )
 })
 </script>

@@ -2,7 +2,7 @@
   <div id="sidebar" class="p-8 space-y-2 fixed z-50 top-0 left-0 h-full shadow-sm overflow-hidden dark:text-neutral-200 flex bg-white">
     <ul class="space-y-4 my-10">
       <li v-for="link in links" :key="link.name" class="">
-        <nuxt-link :to="link.url" class="flex items-center gap-4 bg-brand-50 hover:bg-brand-200 dark:bg-brand-900/20 p-5 rounded-lg cursor-pointer hover:scale-105 transition-all font-bold uppercase">
+        <nuxt-link :to="link.url" class="flex items-center gap-4 bg-red-50 hover:bg-red-200 dark:bg-brand-900/20 p-5 rounded-lg cursor-pointer hover:scale-105 transition-all font-bold uppercase">
           <icon :name="link.icon" />
           {{ link.name }}
         </nuxt-link>
@@ -21,6 +21,6 @@ const links = [
 
 <style scoped>
 .router-link-exact-active {
-  background-color: var(--color-brand-200);
+  background-color: var(--color-red-200);
 }
 </style>
