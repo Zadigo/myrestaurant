@@ -10,7 +10,7 @@
     <div class="grid grid-cols-3">
       <nuxt-card v-for="link in welcomeLinks" :key="link.to">
         <nuxt-link :to="link.to">
-          <img :alt="link.text" src="/burger1.jpg">
+          <nuxt-img :alt="link.text" src="/burger1.jpg" class="rounded-lg" />
           <p class="font-medium">{{ link.text }}</p>
         </nuxt-link>
       </nuxt-card>

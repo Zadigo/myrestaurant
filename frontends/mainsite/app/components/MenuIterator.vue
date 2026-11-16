@@ -5,24 +5,22 @@
     </div>
 
     <div class="grid grid-cols-4 gap-2">
-      <slot name="items" :items="availableMenus">
-        <article v-for="item in availableMenus" :key="item.id">
+      <slot name="items" :items="data">
+        <article v-for="item in data" :key="item.id">
           <slot name="item" :item="item">
-            <a href="#" @click.prevent="emit('select', item)">
-              <nuxt-card :aria-label="item.name" class="shadow-sm my-1">
-                <img src="/burger1.jpg" :alt="item.name" class="rounded-lg">
-
+            <nuxt-link href="#" @click.prevent="emit('select', item)">
+              <nuxt-card :aria-label="item.name">
+                <nuxt-img src="/burger1.jpg" :alt="item.name" class="rounded-lg" />
+  
                 <div>
                   <h5 class="font-bold text-2xl mt-5">{{ item.name }}</h5>
-                  <p class="mb-1">{{ item.description }}</p>
-                  <p class="font-light">
-                    <small class="text-muted">
-                      {{ item.price_post_tax }}€
-                    </small>
+                  <p class="mb-1 text-sm">{{ item.description }}</p>
+                  <p class="font-light text-sm text-slate-400">
+                    {{ item.price_post_tax }}€
                   </p>
                 </div>
               </nuxt-card>
-            </a>
+            </nuxt-link>
           </slot>
         </article>
       </slot>
@@ -31,8 +29,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { RestaurantMenu } from '~/types'
-import { availableMenus } from '~/data/__fixtures__/index'
-
-const emit =defineEmits<{ 'select': [item: RestaurantMenu] }>()
+const emit = defineEmits<{ 'select': [item: RestaurantMenu] }>()
+const { data } = useAsyncData('menus', async () => await $fetch('/api/menus', { method: 'GET' }), { default: () => []})
 </script>
