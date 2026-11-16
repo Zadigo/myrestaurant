@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.constraints import UniqueConstraint
-from inventory.models import Menu, Product
+from restaurant.inventory.models import Menu, Product
 
 
 class Favorite(models.Model):
@@ -22,12 +22,14 @@ class Favorite(models.Model):
         null=True
     )
     created_on = models.DateField(auto_now=True)
-    
+
     class Meta:
         constraints = [
-            UniqueConstraint(fields=['user', 'menu'], name='unique_favorite_menu_by_user'),
-            UniqueConstraint(fields=['user', 'product'], name='unique_favorite_product_by_user')
+            UniqueConstraint(fields=['user', 'menu'],
+                             name='unique_favorite_menu_by_user'),
+            UniqueConstraint(fields=['user', 'product'],
+                             name='unique_favorite_product_by_user')
         ]
-    
+
     def __str__(self):
         return self.user

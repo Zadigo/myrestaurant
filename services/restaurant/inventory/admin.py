@@ -1,13 +1,14 @@
 from django.contrib import admin
 
-from inventory.models import Menu, Product, Drink
+from restaurant.inventory.models import Menu, Product, Drink
+
 
 @admin.register(Menu)
 class MenuAdmin(admin.ModelAdmin):
     list_display = ['name', 'active']
     filter_horizontal = ['products', 'drinks']
     actions = ['activate']
-    
+
     def activate(self, request, queryset):
         queryset.update(active=True)
 
@@ -16,7 +17,7 @@ class MenuAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'active']
     actions = ['activate']
-    
+
     def activate(self, request, queryset):
         queryset.update(active=True)
 
@@ -27,6 +28,6 @@ class DrinkAdmin(admin.ModelAdmin):
     search_fields = ['name', 'flavor']
     list_per_page = 10
     actions = ['activate']
-    
+
     def activate(self, request, queryset):
         queryset.update(active=True)

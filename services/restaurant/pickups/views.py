@@ -1,10 +1,10 @@
-from pickups.serializers import PickupSerializer, ValidatePickupSerializer
+from restaurant.pickups.serializers import PickupSerializer, ValidatePickupSerializer
 from django.shortcuts import get_list_or_404, render
 from rest_framework import serializers, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from pickups.models import Pickup
+from restaurant.pickups.models import Pickup
 
 
 def get_user_current_orders(request) -> list:

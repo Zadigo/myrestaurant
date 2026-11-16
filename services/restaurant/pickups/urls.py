@@ -1,5 +1,5 @@
 from django.urls import re_path
-from pickups import views
+from restaurant.pickups import views
 
 app_name = 'pickups'
 

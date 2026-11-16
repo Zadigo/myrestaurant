@@ -1,6 +1,6 @@
 from django.urls import re_path
 
-from favorites import views
+from restaurant.favorites import views
 
 app_name = 'favorites'
 

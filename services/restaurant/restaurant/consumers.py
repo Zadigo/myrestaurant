@@ -1,6 +1,6 @@
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-from pickups.models import Pickup
+from restaurant.pickups.models import Pickup
 
 
 class CustomerOrdersConsumer(AsyncJsonWebsocketConsumer):

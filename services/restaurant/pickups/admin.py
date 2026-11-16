@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from pickups.models import Pickup
+from restaurant.pickups.models import Pickup
+
 
 @admin.register(Pickup)
 class PickupAdmin(admin.ModelAdmin):

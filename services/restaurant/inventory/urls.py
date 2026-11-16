@@ -1,5 +1,5 @@
 from django.urls import re_path
-from inventory import views
+from restaurant.inventory import views
 
 app_name = 'inventory'
 

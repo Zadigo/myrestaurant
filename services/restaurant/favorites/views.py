@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from favorites.models import Favorite
+from restaurant.favorites.models import Favorite
 from rest_framework.response import Response
-from favorites.serializers import FavoriteSerialier
+from restaurant.favorites.serializers import FavoriteSerialier
+
 
 @api_view(['get'])
 @permission_classes([IsAuthenticated])
