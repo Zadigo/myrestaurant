@@ -1,4 +1,4 @@
-import tailwind from '@tailwindcss/vite'
+// import tailwind from '@tailwindcss/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -24,13 +24,9 @@ export default defineNuxtConfig({
     url: process.env.NUXT_PUBLIC_DJANGO_PROD_URL
   },
 
-  vite: {
-    plugins: [tailwind()]
-  },
-
-  ui: {
-    prefix: 'nuxt',
-  },
+  // vite: {
+  //   plugins: [tailwind()]
+  // },
 
   css: ['~/assets/css/tailwind.css'],
 
@@ -44,6 +40,15 @@ export default defineNuxtConfig({
     'nuxt-vuefire',
     '@nuxtjs/seo'
   ],
+
+  runtimeConfig: {
+    firebaseProjectId: process.env.NUXT_FIREBASE_PROJECT_ID,
+    firebaseClientEmail: process.env.NUXT_FIREBASE_CLIENT_EMAIL,
+    firebasePrivateKey: process.env.NUXT_FIREBASE_PRIVATE_KEY,
+    public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL,
+    }
+  },
 
   vuefire: {
     config: {
@@ -73,6 +78,29 @@ export default defineNuxtConfig({
   imports: {
     dirs: [
       '~/constants'
+    ]
+  },
+
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+
+    head: {
+      titleTemplate: '%s %separator %siteName',
+      templateParams: {
+        separator: '-',
+        siteName: process.env.NUXT_PUBLIC_SITE_NAME
+      }
+    }
+  },
+
+  fonts: {
+    families: [
+      {
+        name: 'Montserrat'
+      },
+      {
+        name: 'Google Sans'
+      }
     ]
   }
 })

@@ -1,21 +1,21 @@
 <template>
-  <nuxt-card>
+  <u-card>
     <template #header>
       <h3 class="font-bold">Votre panier</h3>
       <p class="text-muted">1 article · 15,90 €</p>
-      <nuxt-button variant="soft" color="error" @click="empty">Vider le panier</nuxt-button>
+      <u-button variant="soft" color="error" @click="empty">Vider le panier</u-button>
     </template>
 
     {{ cart }}
 
     <template #footer>
       <div>
-        <nuxt-button class="w-full" :disabled="cart.items.length === 0">
+        <u-button class="w-full" :disabled="cart.items.length === 0">
           Passer la commande
-        </nuxt-button>
+        </u-button>
       </div>
     </template> 
-  </nuxt-card>
+  </u-card>
 </template>
 
 <script lang="ts" setup>

@@ -5,25 +5,25 @@
         <!-- Heading -->
         <div class="col-span-12 grid grid-cols-subgrid gap-4 bg-white shadow-sm p-10 rounded-lg">
           <div class="col-span-6 relative">
-            <img src="/burger1.jpg" alt="Menus illustration" class="rounded-lg">
-            <nuxt-button class="absolute top-1/24 m-3">
+            <nuxt-img src="/burger1.jpg" alt="Menus illustration" class="rounded-lg" />
+            <u-button class="absolute top-1/24 m-3">
               <icon name="i-lucide-heart" />
-            </nuxt-button>
+            </u-button>
           </div>
 
           <div class="col-span-6">
-            <nuxt-breadcrumb :items="breadcrumbItems" />
+            <u-breadcrumb :items="breadcrumbItems" />
             <h1 class="text-5xl font-bold">Notre carte</h1>
             <p class="m-0 text-muted">25 - 45 min · Burgers · Halal</p>
 
             <div class="space-x-2 my-4">
-              <nuxt-button variant="soft">
+              <u-button variant="soft">
                 Information
-              </nuxt-button>
+              </u-button>
 
-              <nuxt-button variant="soft" color="error" @click="showDeliveryModal=true">
+              <u-button variant="soft" color="error" @click="showDeliveryModal=true">
                 Livraison
-              </nuxt-button>
+              </u-button>
             </div>
 
             <div class="flex justify-left items-center bg-info/10 rounded-lg p-3 mt-4">
@@ -38,7 +38,7 @@
         </div>
 
         <div class="col-span-8 py-2 mb-10">
-          <nuxt-tabs v-model="currentSelection" :items="items" variant="link" color="neutral">
+          <u-tabs v-model="currentSelection" :items="items" variant="link" color="neutral">
             <template #menus>
               <menu-iterator class="my-10" @select="selectMenu" />
             </template>
@@ -54,7 +54,7 @@
             <template #desserts>
               <button @click="() => {}">Desserts</button>
             </template>
-          </nuxt-tabs>
+          </u-tabs>
         </div>
 
         <div class="col-span-4 py-2 mb-10">
@@ -73,7 +73,6 @@
 
 <script lang="ts" setup>
 import type { TabsItem, BreadcrumbItem } from '@nuxt/ui'
-import type { Nullable, RestaurantMenu } from '~/types'
 
 const breadcrumbItems = ref<BreadcrumbItem[]>([
   { text: 'Accueil', href: '/' },

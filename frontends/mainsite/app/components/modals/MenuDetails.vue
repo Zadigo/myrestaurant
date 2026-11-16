@@ -1,5 +1,5 @@
 <template>
-  <nuxt-modal v-model:open="show">
+  <u-modal v-model:open="show">
     <template #title>
       {{ restaurantMenu ? restaurantMenu.name : 'Détails du menu' }}
     </template>
@@ -16,15 +16,15 @@
         <additional-options :additional-options="restaurantMenu.additional_options || []" />
       </div>
 
-      <nuxt-button @click="add">
+      <u-button @click="add">
         Ajouter au panier
-      </nuxt-button>
+      </u-button>
     </template>
 
     <template #footer>
       <input type="number">
     </template>
-  </nuxt-modal>
+  </u-modal>
 </template>
 
 <script lang="ts" setup>

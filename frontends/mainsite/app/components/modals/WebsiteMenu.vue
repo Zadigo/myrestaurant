@@ -1,24 +1,24 @@
 <template>
-  <base-offcanvas :show="showWebsiteMenu" @close="showWebsiteMenu=false">
+  <u-slideover>
     <ul class="nav nav-pills nav-fill flex-column">
       <li class="nav-item">
-        <router-link :to="{ name: 'welcome_view' }" class="nav-link">
+        <nuxt-link to="/" class="nav-link">
           Votre compte
-        </router-link>
+        </nuxt-link>
       </li>
       <li class="nav-item">
-        <router-link :to="{ name: 'welcome_view' }" class="nav-link">
+        <nuxt-link to="/" class="nav-link">
           Historique de commandes
-        </router-link>
+        </nuxt-link>
       </li>
       <li class="nav-item">
-        <router-link :to="{ name: 'welcome_view' }" class="nav-link">
+        <nuxt-link to="/" class="nav-link">
           FAQ
-        </router-link>
+        </nuxt-link>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled">Deconnexion</a>
       </li>
     </ul>
-  </base-offcanvas>
+  </u-slideover>
 </template>

@@ -2,7 +2,7 @@
   <div id="categories">
     <div v-for="category in categories" :key="category.name">
       <div class="flex justify-start items center">
-        <nuxt-input />
+        <u-input />
         <p class="font-semibold">
           {{ category.name }}
         </p>

@@ -1,5 +1,5 @@
 <template>
-  <nuxt-modal v-model:open="show">
+  <u-modal v-model:open="show">
     <template #modal-title>
       RECETTE LOCALE - Le Barnabé
     </template>
@@ -77,7 +77,7 @@
     <template #modal-footer>
       <input type="number">
     </template>
-  </nuxt-modal>
+  </u-modal>
 </template>
 
 <script lang="ts" setup>

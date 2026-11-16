@@ -9,7 +9,7 @@
         <article v-for="item in data" :key="item.id">
           <slot name="item" :item="item">
             <nuxt-link href="#" @click.prevent="emit('select', item)">
-              <nuxt-card :aria-label="item.name">
+              <u-card :aria-label="item.name">
                 <nuxt-img src="/burger1.jpg" :alt="item.name" class="rounded-lg" />
   
                 <div>
@@ -19,7 +19,7 @@
                     {{ item.price_post_tax }}€
                   </p>
                 </div>
-              </nuxt-card>
+              </u-card>
             </nuxt-link>
           </slot>
         </article>
