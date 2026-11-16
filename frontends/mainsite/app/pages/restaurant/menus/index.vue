@@ -26,7 +26,7 @@
               </u-button>
             </div>
 
-            <div class="flex justify-left items-center bg-info/10 rounded-lg p-3 mt-4">
+            <div class="flex justify-left items-center bg-info/20 rounded-lg p-3 mt-4">
               <icon name="i-lucide-award" class="text-info me-3 fs-1" />
 
               <div>

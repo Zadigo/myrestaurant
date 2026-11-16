@@ -3,7 +3,9 @@
     <template #header>
       <h3 class="font-bold">Votre panier</h3>
       <p class="text-muted">1 article · 15,90 €</p>
-      <u-button variant="soft" color="error" @click="empty">Vider le panier</u-button>
+      <u-button icon="lucide:trash" variant="soft" color="error" @click="empty">
+        Vider le panier
+      </u-button>
     </template>
 
     {{ cart }}
